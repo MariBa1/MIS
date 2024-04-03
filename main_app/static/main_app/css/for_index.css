@@ -1,0 +1,324 @@
+body {
+    font-family: "Poppins", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+/* Меню */
+.navbar.navbar-expand-lg.navbar-light.bg-light {
+    padding: 10px;
+    top: 0;
+    position: sticky;
+    width: 100%;
+    z-index: 1000;
+}
+.font-weight-bold{
+    font-family: cursive;
+    font-weight: 600;
+}
+.navbar-nav {
+    flex-wrap: nowrap;
+} 
+.dropdown-menu {
+    right: 0;
+    left: auto;
+}
+
+/* Банер */
+/* .bg_1 {
+    background-image: url(img/banner.png);
+  } */
+  .bg_1 {
+    background-image: url("/static/main_app/img/banner.png");
+}
+
+
+.single_slider {
+    height: 700px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+/* Текст */
+@media (max-width: 767px) {
+    .single_slider {
+        height: 420px;
+    }
+}
+.slider_text h3 span{
+    font-family: cursive;
+    font-size: 60px;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+@media (max-width: 767px) {
+    .slider_text h3 {
+        font-size: 33px;
+        letter-spacing: 3px;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .slider_text h3 {
+        font-size: 30px;
+    }
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+    .slider_text h3 {
+        font-size: 35px;
+        letter-spacing: 3px;
+    }
+}
+.slider_text p {
+    font-size: 24px;
+    font-weight: 500;
+    color: #000000A6;
+    margin-bottom: 40px;
+    margin-top: 30px;
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+    .slider_text p {
+        font-size: 18px;
+    }
+}
+@media (max-width: 767px) {
+    .slider_text p {
+        font-size: 16px;
+    }
+}
+/* Кнопка банера */
+.custom-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff; /* Колір фону */
+    color: #fff; /* Колір тексту */
+    text-decoration: none; /* Видалити підкреслення ссилки */
+    border-radius: 5px; /* Закругленість кутів */
+}
+
+.custom-button:active {
+    background-color: #0056b3; /* Колір фону після натискання */
+}
+
+
+.custom-button-white {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    background-color:  #f8f9fa; /* Колір фону */
+    color: #6c757d; /* Колір тексту */
+    text-decoration: none; /* Видалити підкреслення ссилки */
+    border-radius: 5px; /* Закругленість кутів */
+
+}
+
+.custom-button-white:active {
+    background-color: #e9ecef; /* Колір фону після натискання */
+}
+
+
+
+
+
+/* Квадратики  */
+
+
+.nav_box .container p{
+        font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #fff;
+    margin-top: 10px;
+    margin-bottom: 26px;
+}
+
+
+.nav_box .container h3{
+    font-size: 26px;
+    font-weight: 500;
+    color: #fff;
+}
+
+    .nav_box .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 20px auto;
+        max-width: 1000px;
+    }
+
+    .container .box {
+        border-radius: 5%;
+        flex: 0 0 calc(33.33% - 10px);
+        background-color: #83C4FF;
+        padding: 20px;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+    }
+
+    @media screen and (max-width: 768px) {
+        .container .box {
+            flex-basis: calc(50% - 20px);
+        }
+    }
+
+    @media screen and (max-width: 770px) {
+        .container .box {
+            flex-basis: calc(100% - 20px);
+        }
+    }
+
+
+
+
+    .welcome_docmed_area {
+        padding-bottom: 220px;
+      }
+      
+      @media (max-width: 767px) {
+        .welcome_docmed_area {
+          padding-bottom: 100px;
+        }
+      }
+      
+      @media (min-width: 992px) and (max-width: 1200px) {
+        .welcome_docmed_area {
+          padding-bottom: 100px;
+        }
+      }
+      
+      @media (min-width: 768px) and (max-width: 991px) {
+        .welcome_docmed_area {
+          padding-bottom: 100px;
+        }
+      }
+
+.welcome_docmed_area .welcome_thumb {
+  position: relative;
+}
+
+.welcome_docmed_area .welcome_thumb .thumb_1 {
+  left: 0;
+}
+
+.welcome_docmed_area .welcome_thumb .thumb_1 img {
+  width: 60%;
+}
+
+@media (max-width: 767px) {
+  .welcome_docmed_area .welcome_thumb .thumb_1 img {
+    width: 100%;
+  }
+}
+
+.welcome_docmed_area .welcome_thumb .thumb_2 {
+  position: absolute;
+  bottom: -94px;
+  right: -37px;
+}
+
+@media (max-width: 767px) {
+  .welcome_docmed_area .welcome_thumb .thumb_2 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .welcome_docmed_area .welcome_thumb .thumb_2 {
+    position: absolute;
+    right: 0;
+    bottom: -40px;
+  }
+}
+
+.welcome_docmed_area .welcome_thumb .thumb_2 img {
+  width: 89%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .welcome_docmed_area .welcome_thumb .thumb_2 img {
+    width: 100%;
+  }
+}
+
+.welcome_docmed_area .welcome_docmed_info {
+  padding-left: 90px;
+}
+
+@media (max-width: 767px) {
+  .welcome_docmed_area .welcome_docmed_info {
+    padding-left: 0;
+    margin-top: 40px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .welcome_docmed_area .welcome_docmed_info {
+    padding-left: 0;
+    margin-top: 100px;
+  }
+}
+
+.welcome_docmed_area .welcome_docmed_info h2 {
+  font-size: 18px;
+  font-weight: 400;
+  color: #1F1F1F;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 9;
+  padding-bottom: 9px;
+}
+
+.welcome_docmed_area .welcome_docmed_info h2:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 50px;
+  background: #5DB2FF;
+}
+
+.welcome_docmed_area .welcome_docmed_info h3 {
+  font-weight: 500;
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 767px) {
+  .welcome_docmed_area .welcome_docmed_info h3 {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 767px) {
+  .welcome_docmed_area .welcome_docmed_info h3 br {
+    display: none;
+  }
+}
+
+.welcome_docmed_area .welcome_docmed_info p {
+  font-size: 16px;
+  color: #727272;
+  line-height: 28px;
+}
+
+.welcome_docmed_area .welcome_docmed_info ul {
+  margin-bottom: 40px;
+  margin-top: 25px;
+}
+
+.welcome_docmed_area .welcome_docmed_info ul li {
+  color: #727272;
+  font-size: 16px;
+  line-height: 28px;
+}
+
+.welcome_docmed_area .welcome_docmed_info ul li i {
+  margin-right: 10px;
+  color: #83c4ff;
+  font-weight: 16px;
+}
