@@ -4,31 +4,11 @@ body {
     font-style: normal;
   }
   
-/* Меню */
-.navbar.navbar-expand-lg.navbar-light.bg-light {
-    padding: 10px;
-    top: 0;
-    position: sticky;
-    width: 100%;
-    z-index: 1000;
-}
-.font-weight-bold{
-    font-family: cursive;
-    font-weight: 600;
-}
-.navbar-nav {
-    flex-wrap: nowrap;
-} 
-.dropdown-menu {
-    right: 0;
-    left: auto;
-}
+
 
 /* Банер */
-/* .bg_1 {
-    background-image: url(img/banner.png);
-  } */
-  .bg_1 {
+
+.bg_1 {
     background-image: url("/static/main_app/img/banner.png");
 }
 
@@ -40,12 +20,14 @@ body {
     background-position: center center;
 }
 
-/* Текст */
+
 @media (max-width: 767px) {
     .single_slider {
         height: 420px;
     }
 }
+
+/* Текст */
 .slider_text h3 span{
     font-family: cursive;
     font-size: 60px;
@@ -87,19 +69,6 @@ body {
     }
 }
 /* Кнопка банера */
-.custom-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff; /* Колір фону */
-    color: #fff; /* Колір тексту */
-    text-decoration: none; /* Видалити підкреслення ссилки */
-    border-radius: 5px; /* Закругленість кутів */
-}
-
-.custom-button:active {
-    background-color: #0056b3; /* Колір фону після натискання */
-}
-
 
 .custom-button-white {
     display: inline-block;

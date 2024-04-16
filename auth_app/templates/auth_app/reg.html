@@ -1,0 +1,40 @@
+{% extends "main_app/base.html" %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'auth_app/css/for_auth.css' %}">
+{% endblock  %}
+
+{% block content %}
+<div class="single_slider">
+    <div class="text-container">
+        <h3> <span class="font-weight-bold">Зареєструйтесь!</span></h3>
+        <p>Пройдіть реєстрацію в системі для доступу до іншого функціоналу сайту!<br>
+            Ми ніколи нікому не передамо Ваші данні.</p>
+    </div>
+</div>
+
+<div class="container mt-4 mb-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form action="{% url "auth_app:login" %}" method='POST'>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Логін</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Пароль</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword2" class="form-label">Повторіть пароль</label>
+                    <input type="password" class="form-control" id="exampleInputPassword2">
+                </div>
+                <button type="submit" class="custom-button">Зареєструватись</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'main_app',
+    'auth_app',
 ]
 
 MIDDLEWARE = [
@@ -78,8 +79,12 @@ WSGI_APPLICATION = 'MIS.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'database_medsite',
+        'USER': 'root_database',
+        'PASSWORD': '54326534',
+        'HOST': 'localhost',
+        'PORT':'5432', ### вхідні запроси с порту
     }
 }
 

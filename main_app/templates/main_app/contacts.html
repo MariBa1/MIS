@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    CONTACT
-</body>
-</html>
+{% extends "main_app/base.html" %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'main_app/css/for_index.css' %}">
+{% endblock  %}
