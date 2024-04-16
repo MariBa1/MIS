@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'main_app',
     'auth_app',
+    'cards_app',
 ]
 
 MIDDLEWARE = [

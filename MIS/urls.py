@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('main_app.urls', namespace='main_app')),## зєднання з urls.py додатка main
     path('auth/',include('auth_app.urls', namespace='auth_app')),  
+    path('medcard/',include('cards_app.urls', namespace='cards_app')),
 ]
