@@ -1,0 +1,22 @@
+{% extends "auth_app/base_ok.html" %}
+{% load static %}
+
+{% block section_in_menu %}
+<a class="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password">Медичні карти</a>
+{% endblock %}
+
+{% block individually_for_role %}
+<div class="form-group">
+    <label class="form-label">Спеціалізація</label>
+    <input type="text" class="form-control form-control-sm">
+  </div>
+  <div class='row'>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label class="form-label">Cтаж</label>
+      <input type="text" class="form-control form-control-sm">
+
+    </div>
+  </div>
+  
+  {% endblock %}

@@ -1,0 +1,139 @@
+html, body {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+}
+
+footer {
+  flex-shrink: 0;
+}
+
+body{
+  background: #e4e8eb !important;
+}
+
+.media-body .btn {
+  margin-top: 30px; /* Додати верхній відступ між кнопками */
+}
+
+
+@media (max-width: 991px) {
+  .media-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+
+label.btn {
+  margin-bottom: 0;
+}
+
+.btn-outline-primary {
+  border-color: #26B4FF;
+  background: transparent;
+  color: #26B4FF;
+}
+
+.btn {
+  cursor: pointer;
+
+}
+
+.text-light {
+  color: #babbbc !important;
+}
+
+
+.card {
+  background-clip: padding-box;
+  box-shadow: 10px 1px 4px #83c3ff77;
+  margin: 30px;
+}
+
+.row-bordered {
+  overflow: hidden;
+}
+
+.account-settings-fileinput {
+  position: absolute;
+  visibility: hidden;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.account-settings-links .list-group-item.active {
+  font-weight: bold !important;
+}
+html:not(.dark-style) .account-settings-links .list-group-item.active {
+  background: transparent !important;
+}
+.account-settings-multiselect ~ .select2-container {
+  width: 100% !important;
+}
+.light-style .account-settings-links .list-group-item {
+  padding: 0.85rem 1.5rem;
+  border-color: #83c3ffd7  !important;
+}
+.light-style .account-settings-links .list-group-item.active {
+  color: #4e5155 !important;
+}
+.material-style .account-settings-links .list-group-item {
+  padding: 0.85rem 1.5rem;
+  border-color: #83c3ffd7  !important;
+}
+.material-style .account-settings-links .list-group-item.active {
+  color: #4e5155 !important;
+}
+.dark-style .account-settings-links .list-group-item {
+  padding: 0.85rem 1.5rem;
+  border-color: rgba(255, 255, 255, 0.03) !important;
+}
+.dark-style .account-settings-links .list-group-item.active {
+  color: #fff !important;
+}
+.light-style .account-settings-links .list-group-item.active {
+  color: #4E5155 !important;
+}
+.light-style .account-settings-links .list-group-item {
+  padding: 0.85rem 1.5rem;
+  border-color: rgba(24,28,33,0.03) !important;
+}
+.title_card{
+  font-weight: bold;
+  padding: 0.85rem 1.5rem;
+  color: #4E5155
+}
+
+@media (min-width: 993px) {
+  .title_card {
+    font-size: 24px;
+  }
+}
+@media (max-width: 992px) {
+  .title_card {
+    font-size: 19px;
+  }}
+
+
+.hr_cards{
+    border-color: blue; /* Задаємо колір */
+    border-width: 2px; /* Задаємо товщину */
+}
+.card-body .btn-outline-primary{
+  margin-top:30px ;
+
+}
