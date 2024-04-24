@@ -7,72 +7,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{% static 'main_app/css/base.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'auth_app/css/for_ok.css' %}">
-    <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'cards_app/css/for_ok.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <title>Medical Center</title>
     {% block css %}{% endblock %}
 </head>
 <body>
-    {% include "main_app/global_nav.html" %}
+  {% include "main_app/global_nav.html" %}
     <div class="container light-style flex-grow-1 container-p-y">
-        <div class="card overflow-hidden">
-          <div class="row no-gutters row-bordered row-border-light">
-              
-              <div class="col-md-3 pt-0">
-                <button class="navbar-toggler bi bi-three-dots d-md-none" type="button" data-toggle="collapse" data-target="#sidebarMenu"
-                          aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-                  </button> 
-                <div class="list-group list-group-flush account-settings-links collapse navbar-collapse d-md-block" id="sidebarMenu">
-      
-                  <a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">Особистий кабінет</a>
-                  <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password">Зміна паролю</a>
-                  {% block section_in_menu %}{% endblock %}
-                  <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-info">Загальна інформація</a>
-                  <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-social-links">Щеплення</a>
-                  <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-connections">Огляди</a>
-                </div>
-              </div> 
-      
-        <div class="col-md-9">
-          <div class="tab-content">
-            <div class="tab-pane fade active show" id="account-general">
+      <div class="card overflow-hidden">
+        <div class="row no-gutters row-bordered row-border-light">
+          
+          <div class="col-md-3 pt-0">
+            <button class="navbar-toggler bi bi-three-dots d-md-none" type="button" data-toggle="collapse" data-target="#sidebarMenu" 
+            aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation"></button> 
+            <div class="list-group list-group-flush account-settings-links collapse navbar-collapse d-md-block" id="sidebarMenu">
+              <a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">Особистий кабінет</a>
+              <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password">Зміна паролю</a>
+                {% block section_in_menu %}{% endblock %}
+              <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-info">Загальна інформація</a>
+              <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-social-links">Щеплення</a>
+              <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-connections">Огляди</a>
+            </div>
+          </div> 
+          
+          <div class="col-md-9">
+            <div class="tab-content">
+              <div class="tab-pane fade active show" id="account-general">
                 <div class="card-body media align-items-center">
-                <div class="media-body ml-4">
-                  <div class="row">
-                    <div class="col-md-6">
-                  <img src='{% static "auth_app/img/images.png" %}' alt="" class="d-block mx-auto">
-                  <label class="btn btn-outline-primary">
-                    Вибрати фото
-                    <input type="file" class="account-settings-fileinput">
-                  </label>
-                  <button type="button" class="btn btn-default md-btn-flat">Відхилити</button>
-                  <div class="text-light small mt-1">Формати JPG, GIF, PNG. Максимальний об'єм 800кб</div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label class="form-label">Призвіще</label>
-                      <input type="text" class="form-control form-control-sm">
-                    </div>
-                    <div class="form-group">
-                      <label class="form-label">Ім'я</label>
-                      <input type="text" class="form-control form-control-sm">
-                    </div>
-                    <div class="form-group">
-                      <label class="form-label">По-батькові</label>
-                      <input type="text" class="form-control form-control-sm">
-                    </div>
-                    {% block individually_for_role %}{% endblock %}
+                  <div class="media-body ml-4">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <img src='{% static "cards_app/img/images.png" %}' alt="" class="d-block mx-auto">
+                        <label class="btn btn-outline-primary">
+                          Вибрати фото
+                          <input type="file" class="account-settings-fileinput">
+                        </label>
+                        <button type="button" class="btn btn-default md-btn-flat">Відхилити</button>
+                        <div class="text-light small mt-1">Формати JPG, GIF, PNG. Максимальний об'єм 800кб</div>
+                      </div>
+                      
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label class="btn btn-outline-primary">Редагувати</label>
+                          <label class="form-label">Призвіще</label>
+                          <input type="text" class="form-control form-control-sm">
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label">Ім'я</label>
+                          <input type="text" class="form-control form-control-sm">
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label">По-батькові</label>
+                          <input type="text" class="form-control form-control-sm">
+                        </div>
+                          {% block individually_for_role %}{% endblock %}
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="btn btn-outline-primary">Редагувати</label>
+                          </div>
                         </div>
                       </div>
+                    
                     </div>
                   </div>
-                </div>
               </div>
              
 
@@ -123,7 +121,7 @@
       
                     </div>
                   </div>
-      
+                  {% block medcard_all %}{% endblock %}
       
       
                   <div class="tab-pane fade" id="account-info">
@@ -290,6 +288,7 @@
       
                     </div>
                   </div>
+
                 </div>
               </div>
             </div>

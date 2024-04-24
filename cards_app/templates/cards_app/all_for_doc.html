@@ -1,0 +1,57 @@
+{% extends "auth_app/base_ok.html" %}
+{% load static %}
+
+{% block section_in_menu %}
+  <a class="list-group-item list-group-item-action" data-toggle="list" href="#medcard_all">Медичні карти</a>
+{% endblock %}
+
+{% block individually_for_role %}
+  <div class="form-group">
+      <label class="form-label">Спеціалізація</label>
+      <input type="text" class="form-control form-control-sm">
+    </div>
+    <div class='row'>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="form-label">Cтаж</label>
+        <input type="text" class="form-control form-control-sm">
+
+      </div>
+    </div>
+  
+  {% endblock %}
+
+  {% block medcard_all %}
+    <div class="tab-pane fade" id="medcard_all">
+      <div class="card-body pb-2">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Боднар Владислав Романович</h5>
+            <img src='{% static "auth_app/img/images.png" %}' alt="Зображення" class="img-thumbnail">
+            <p class="card-text">Основна інфа про психічні травми спричинені КНУБА</p>
+            <a href="#" class="btn btn-outline-primary">Відкрити список</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Балобольченкова Марія Ігорівна</h5>
+            {% comment %} <img src='{% static "auth_app/img/images.png" %}' alt="Зображення" class="img-thumbnail"> {% endcomment %}
+            <p class="card-text">Основна інфа про психічні травми спричинені КНУБА</p>
+            <a href="#" class="btn btn-outline-primary">Відкрити список</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Піддубний Дмитро Анатолійович</h5>
+            {% comment %} <img src='{% static "auth_app/img/images.png" %}' alt="Зображення" class="img-thumbnail"> {% endcomment %}
+            <p class="card-text">Основна інфа про психічні травми спричинені КНУБА</p>
+            <a href="#" class="btn btn-outline-primary">Відкрити список</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  {% endblock %}
