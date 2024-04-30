@@ -1,0 +1,99 @@
+{% extends "base/base_ok.html" %}
+{% load static %}
+{% block dynamic_content %}
+мяу{% endblock dynamic_content %}
+{% comment %} 
+{% block section_in_menu %}
+  <a class="list-group-item list-group-item-action" data-toggle="list" href="#medcard_all">Медичні карти</a>
+{% endblock %}
+
+
+{% block profile %}
+                  <div class="media-body ml-4">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <img src='{% static "cards_app/img/images.png" %}' alt="" class="d-block mx-auto">
+                        <label class="btn btn-outline-primary">
+                          Вибрати фото
+                          <input type="file" class="account-settings-fileinput">
+                        </label>
+                        <button type="button" class="btn btn-default md-btn-flat">Відхилити</button>
+                        <div class="text-light small mt-1">Формати JPG, GIF, PNG. Максимальний об'єм 800кб</div>
+                      </div>
+                      
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="form-label">Призвіще</label>
+                          <input type="text" class="form-control form-control-sm">
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label">Ім'я</label>
+                          <input type="text" class="form-control form-control-sm">
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label">По-батькові</label>
+                          <input type="text" class="form-control form-control-sm">
+                        </div>
+                          {% block individually_for_role %}{% endblock %}
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="btn btn-outline-primary">Редагувати</label>
+                          </div>
+                        </div>
+                      </div>
+                    
+                    </div>
+                  </div>
+{% endblock profile %}
+
+
+{% block individually_profile %}
+  <div class="form-group">
+      <label class="form-label">Спеціалізація</label>
+      <input type="text" class="form-control form-control-sm">
+    </div>
+    <div class='row'>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="form-label">Cтаж</label>
+        <input type="text" class="form-control form-control-sm">
+
+      </div>
+    </div>
+  
+  {% endblock %}
+
+  {% block medcard_all %}
+    <div class="tab-pane fade" id="medcard_all">
+      <div class="card-body pb-2">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Боднар Владислав Романович</h5>
+            <img src='{% static "cards_app/img/images.png" %}' alt="Зображення" class="img-thumbnail">
+            <p class="card-text">Основна інфа про психічні травми спричинені КНУБА</p>
+            <a href="#" class="btn btn-outline-primary">Відкрити список</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Балобольченкова Марія Ігорівна</h5>
+            {% comment %} <img src='{% static "auth_app/img/images.png" %}' alt="Зображення" class="img-thumbnail"> {% endcomment %}
+            {% comment %} <p class="card-text">Основна інфа про психічні травми спричинені КНУБА</p>
+            <a href="#" class="btn btn-outline-primary">Відкрити список</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Піддубний Дмитро Анатолійович</h5> {% endcomment %}
+            {% comment %} <img src='{% static "auth_app/img/images.png" %}' alt="Зображення" class="img-thumbnail"> {% endcomment %}
+            {% comment %} <p class="card-text">Основна інфа про психічні травми спричинені КНУБА</p>
+            <a href="#" class="btn btn-outline-primary">Відкрити список</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  {% endblock %} {% endcomment %} 

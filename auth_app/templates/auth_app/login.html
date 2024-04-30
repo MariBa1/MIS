@@ -15,22 +15,38 @@
 </div>
 
 <div class="container mt-4 mb-4">
+    {% include "includes/notification.html" %}
     <div class="row justify-content-center">
         <div class="col-md-6">
             <form action="{% url "auth_app:login" %}" method='POST'>
+                {% csrf_token %}
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Логін</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <label for="id_username" class="form-label">Логін</label>
+                    <input type="text" class="form-control"
+                    name="username" id="id_username"
+                    value="{% if form.username.value %}{{form.username.value}}{% endif %}"
+                    placeholder="Введіть нік" required>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Пароль</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <label for="id_password" class="form-label">Пароль</label>
+                    <input type="password" class="form-control" name="password" id="id_password"
+                    placeholder="Введіть пароль" required>
+                </div>
+                {% comment %} <div class="mb-3">
+                    <label for="id_username" class="form-label">Логін</label>
+                    <input type="text" class="form-control" id="id_username" 
+                    name="username">
                 </div>
                 <div class="mb-3">
-                    <p>Ви не зареєстровані? <a href="{% url 'auth_app:registration' %}">Реєстрація пацієнтів</a> або <a href="{% url 'auth_app:registration' %}">Реєстрація</a></p>
-                </div>
+                    <label for="id_password" class="form-label">Пароль</label>
+                    <input type="password" class="form-control" id="id_password" name="password">
+                </div> {% endcomment %}
                 <button type="submit" class="custom-button">Ввійти</button>
             </form>
+            <div class="mb-3">
+                <p>Ви не зареєстровані? <a href="{% url 'auth_app:registration' %}">Реєстрація пацієнтів</a> або <a href="{% url 'auth_app:registration' %}">Реєстрація</a></p>
+            </div>
+                
         </div>
     </div>
 </div>

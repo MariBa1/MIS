@@ -1,0 +1,32 @@
+{% extends "base/base_ok.html" %}
+{% load static %}
+
+{% block dynamic_content %}
+
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Боднар Владислав Романович</h5>
+        <img src='{% static "cards_app/img/images.png" %}' alt="Зображення" class="card-img-left">
+        <p class="card-text">Основна інфа про психічні травми спричинені КНУБА</p>
+        <a href="#" class="btn btn-outline-primary">Відкрити список</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Балобольченкова Марія Ігорівна</h5>
+        <img src='{% static "cards_app/img/images.png" %}' alt="Зображення" class="card-img-left">
+        <p class="card-text">Основна інфа про психічні травми спричинені КНУБА</p>
+        <a href="#" class="btn btn-outline-primary">Відкрити список</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Піддубний Дмитро Анатолійович</h5>
+        <img src='{% static "cards_app/img/images.png" %}' alt="Зображення" class="card-img-left">
+        <p class="card-text">Основна інфа про психічні травми спричинені КНУБА</p>
+        <a href="#" class="btn btn-outline-primary">Відкрити список</a>
+      </div>
+    </div>
+
+  {% endblock %}

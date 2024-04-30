@@ -16,7 +16,8 @@
 
 <div class="container mt-4 mb-4">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+
+        {% comment %} <div class="col-md-6">
             <form action="{% url "auth_app:login" %}" method='POST'>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Логін</label>
@@ -32,6 +33,39 @@
                 </div>
                 <button type="submit" class="custom-button">Зареєструватись</button>
             </form>
+        </div> {% endcomment %}
+        <div class="col-md-4">
+            <form action="{% url "auth_app:login" %}" method='POST'>
+                <div class="mb-3">
+                    <label for="exampleInputLastName" class="form-label">Прізвище</label>
+                    <input type="text" class="form-control" id="exampleInputLastName" aria-describedby="lastNameHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputFirstName" class="form-label">Ім'я</label>
+                    <input type="text" class="form-control" id="exampleInputFirstName" aria-describedby="firstNameHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputUsername" class="form-label">Користувач</label>
+                    <input type="text" class="form-control" id="exampleInputUsername" aria-describedby="usernameHelp">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Логін</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Пароль</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword2" class="form-label">Повторіть пароль</label>
+                    <input type="password" class="form-control" id="exampleInputPassword2">
+                </div>
+            </form>
+        </div>
+        <div class="text-center"> <!-- Додали клас text-center для центрування тексту кнопки -->
+            <button type="submit" class="custom-button">Зареєструватись</button>
         </div>
     </div>
 </div>

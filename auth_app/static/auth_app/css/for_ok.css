@@ -75,12 +75,10 @@ label.btn {
   height: 1px;
   opacity: 0;
 }
-.account-settings-links .list-group-item.active {
+/* .account-settings-links .list-group-item.active {
   font-weight: bold !important;
 }
-html:not(.dark-style) .account-settings-links .list-group-item.active {
-  background: transparent !important;
-}
+
 .account-settings-multiselect ~ .select2-container {
   width: 100% !important;
 }
@@ -91,27 +89,11 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
 .light-style .account-settings-links .list-group-item.active {
   color: #4e5155 !important;
 }
-.material-style .account-settings-links .list-group-item {
-  padding: 0.85rem 1.5rem;
-  border-color: #83c3ffd7  !important;
-}
-.material-style .account-settings-links .list-group-item.active {
+
+.list-group .nav-link.active{
   color: #4e5155 !important;
-}
-.dark-style .account-settings-links .list-group-item {
-  padding: 0.85rem 1.5rem;
-  border-color: rgba(255, 255, 255, 0.03) !important;
-}
-.dark-style .account-settings-links .list-group-item.active {
-  color: #fff !important;
-}
-.light-style .account-settings-links .list-group-item.active {
-  color: #4E5155 !important;
-}
-.light-style .account-settings-links .list-group-item {
-  padding: 0.85rem 1.5rem;
-  border-color: rgba(24,28,33,0.03) !important;
-}
+  border-color: #83c3ffd7
+} */
 .title_card{
   font-weight: bold;
   padding: 0.85rem 1.5rem;
@@ -130,14 +112,15 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
 
 
 .hr_cards{
-    border-color: blue; /* Задаємо колір */
+    border-color: rgb(138, 213, 241); /* Задаємо колір */
     border-width: 2px; /* Задаємо товщину */
+    margin: 2px;
 }
 .card-body .btn-outline-primary{
   margin-top:30px ;
 
 }
-img .img-thumbnail {
+img .img-thumbnail, .card-img-left {
   float: left;
   height: 120px !important; 
   padding: .25rem;
@@ -145,3 +128,15 @@ img .img-thumbnail {
   border: var(--bs-border-width) solid var(--bs-border-color);
   border-radius: var(--bs-border-radius);
   max-width: 100%;}
+
+  .navbar-toggler {
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem; /* Розмір значка три крапки */
+}
+
+/* Стилізація елементів меню */
+.list-group .nav-link {
+    padding: 15px;
+    border: none;
+}
