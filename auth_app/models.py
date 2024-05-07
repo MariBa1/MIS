@@ -73,6 +73,7 @@ class Doctor(models.Model):
 
 
 class Patient(models.Model):
+    user = models.OneToOneField("auth_app.CustomUser", verbose_name="ID користувача", on_delete=models.CASCADE)
     SEX = [
         ('Ч','Чоловік'),
         ('Ж','Жінка'),]

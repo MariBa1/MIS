@@ -6,11 +6,11 @@ class MedCards(models.Model):
     doctor = models.ForeignKey('auth_app.Doctor', on_delete=models.SET_DEFAULT, default='Лікаря не назначено', verbose_name='ID лікаря')
     dispensary_group = models.BooleanField(verbose_name='Диспансерна група')
     registration_date = models.DateField(verbose_name='Поставлено на облік')
-    deregistration_date = models.DateField(blank=True, verbose_name='Знято з обліку')
+    deregistration_date = models.DateField(blank=True, null=True, verbose_name='Знято з обліку')
     class Meta:
         db_table = 'MedCards'
-        verbose_name = 'Медичних карт'
-        verbose_name_plural = 'Медичну карту'
+        verbose_name = 'Медичну карту'
+        verbose_name_plural = 'Медичні картки'
     def __str__(self):
         return f"{self.id}."
     def display_id(self):
@@ -23,8 +23,8 @@ class SignalMarks(models.Model):
     id_medcard = models.ManyToManyField('MedCards', through='IndividualMarks')
     class Meta:
         db_table = 'SignalMarks'
-        verbose_name = 'Сигнальні позначки'
-        verbose_name_plural = 'Сигнальну позначку'
+        verbose_name = 'Сигнальну позначку'
+        verbose_name_plural = 'Сигнальні позначки'
     def __str__(self):
         return f"{self.id}.{self.name}"    
 
@@ -37,8 +37,8 @@ class IndividualMarks(models.Model):
 
     class Meta:
         db_table = 'IndividualMarks'
-        verbose_name = 'Індивідуальні позначки'
-        verbose_name_plural = 'Індивідуальну позначку'
+        verbose_name = 'Індивідуальну позначку'
+        verbose_name_plural = 'Індивідуальні позначки'
     def __str__(self):
         return f"{self.id}.{self.medcard} має позначку {self.name}"  
         

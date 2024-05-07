@@ -1,8 +1,9 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import redirect, render, HttpResponseRedirect
 from django.contrib import auth
 from django.urls import reverse
-from auth_app.forms import UserLoginForm
+from auth_app.forms import UserLoginForm, UserCreationForm, UserRegForm
+from auth_app.models import CustomUser
 
 
 def login(request):
@@ -14,21 +15,30 @@ def login(request):
             user = auth.authenticate(username=username, password=password) ## чи є такий користувач??
             if user:
                 auth.login(request, user)
-                return HttpResponseRedirect(reverse('cards_app:prof_doc'))
+                return HttpResponseRedirect(reverse('auth_app:prof_doc'))
     else:
         form = UserLoginForm()    
-    context = {
-        'form': form
-    }
+    context = {'form': form}
     return render(request, 'auth_app/login.html',context)
 
 
 def reg(request):
-    return render(request, 'auth_app/reg.html')
+    if request.method == 'POST':
+        form = UserRegForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.instance
+            auth.login(request, user)
+            return HttpResponseRedirect(reverse('auth_app:prof_doc'))
+    else:
+        form = UserRegForm()
+    context = {'form': form}
+    return render(request, 'auth_app/reg.html', context)
 
 
 def logout(request):
-    return render(request, 'auth_app/logout.html')
+    auth.logout(request)
+    return redirect(reverse('main_app:index'))
 
 
 
