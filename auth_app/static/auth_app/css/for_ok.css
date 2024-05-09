@@ -116,10 +116,7 @@ label.btn {
     border-width: 2px; /* Задаємо товщину */
     margin: 2px;
 }
-.card-body .btn-outline-primary{
-  margin-top:30px ;
 
-}
 img .img-thumbnail, .card-img-left {
   float: left;
   height: 120px !important; 
@@ -139,4 +136,10 @@ img .img-thumbnail, .card-img-left {
 .list-group .nav-link {
     padding: 15px;
     border: none;
+}
+ 
+@media (max-width: 992px) {
+  img.img-fluid {
+    width: 100% !important;
+  }
 }

@@ -6,6 +6,6 @@ app_name = 'cards_app'
 
 urlpatterns = [
 
-    path('doctor1/all_cards/',views.all_cards, name='all_cards'),
+    path('all_cards/',views.all_cards, name='all_cards'),
 
 ]

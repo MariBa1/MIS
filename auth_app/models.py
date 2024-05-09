@@ -1,3 +1,4 @@
+from django.contrib.auth.models import Group
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.forms import ValidationError
@@ -41,7 +42,7 @@ class Address(models.Model):
 
 
 class CustomUser(AbstractUser): 
-    img = models.ImageField(upload_to='media/%Y/%m', blank=True, null=True, verbose_name='Фото')
+    img = models.ImageField(upload_to='media/', blank=True, null=True, verbose_name='Фото')
     email = models.EmailField(unique=True, verbose_name= 'Email')
     first_name = models.CharField(max_length=100, verbose_name= 'Iмя')
     last_name = models.CharField(max_length=100, verbose_name= 'Призвіще')
@@ -77,8 +78,8 @@ class Patient(models.Model):
     SEX = [
         ('Ч','Чоловік'),
         ('Ж','Жінка'),]
-    sex = models.CharField(max_length=1, choices=SEX, verbose_name='Cтать')
-    date_of_birth = models.DateField(verbose_name='Дата народження')
+    sex = models.CharField(blank=True, null=True, max_length=1, choices=SEX, verbose_name='Cтать')
+    date_of_birth = models.DateField(blank=True, null=True, verbose_name='Дата народження')
     address = models.ForeignKey("auth_app.Address", blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Адреса')
     id_doctor = models.ManyToManyField("auth_app.Doctor", 
                                         through='FamilyDoctor')
@@ -95,10 +96,11 @@ class Patient(models.Model):
 class FamilyDoctor(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, verbose_name='Пацієнт')
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE,verbose_name='Лікар')
+    group = models.ForeignKey(Group, on_delete=models.SET_NULL, null=True, verbose_name='Група')
     class Meta:
         db_table = 'FamilyDoctor'
         verbose_name = 'Cімейного лікаря'
-        verbose_name_plural = 'Сімейних лікаря'
+        verbose_name_plural = 'Сімейні лікарі'
     def __str__(self):
         return f"{self.id} - {self.patient}"
 
