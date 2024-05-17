@@ -3,20 +3,20 @@
 {% block dynamic_content %}
 
 
-<form action="{% url "auth_app:profile" %}" method="post" enctype="multipart/form-data">
-  {% csrf_token %}
+
 <div class="tab-content">
   <div class="tab-pane fade active show" id="account-general">
     <div class="card-body media align-items-center">
-      <div class="row">
-
-        <div class="col-md-5 mb-3 text-center">
+      <form action="{% url 'auth_app:profile' %}" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-md-5 mb-3 text-center">
             {% if user.img %}
                 <img src="{{ user.img.url }}"
                     alt="Фото профіля" class="img-fluid rounded"
                     style="max-width: 300px; max-height: 300px;">
             {% else %}
-                <img src="{% static "cards_app/img/images.png" %}"
+                <img src="{% static 'cards_app/img/images.png' %}"
                     alt="Фото профіля" class="img-fluid rounded"
                     style="max-width: 300px; max-height: 300px;">
             {% endif %}
@@ -29,10 +29,9 @@
                 <div class="alert alert-danger alert-dismissible fade show">{{form.img.errors}}</div>
                 {% endif %}
         </div>
-
-        <div class="col-md-7">
-            <div class="row">
-                <div class="col-md-12 mb-3">
+              <div class="col-md-7">
+                  <div class="row">
+                      <div class="col-md-12 mb-3">
                   <label for="id_last_name" class="form-label">Призвіще*</label>
                   <input type="text" class="form-control form-control-sm" id="id_last_name"
                       name="last_name" placeholder="Введіть фамілію"
@@ -41,7 +40,7 @@
                         <div class="alert alert-danger alert-dismissible fade show">{{form.last_name.errors}}</div>
                       {% endif %}
                 </div>
-                <div class="col-md-12 mb-3">
+                      <div class="col-md-12 mb-3">
                   <label for="id_first_name" class="form-label">Ім'я*</label>
                   <input type="text" class="form-control form-control-sm" id="id_first_name"
                       name="first_name" placeholder="Введіть ім'я"
@@ -50,187 +49,189 @@
                         <div class="alert alert-danger alert-dismissible fade show">{{form.first_name.errors}}</div>
                       {% endif %}
                 </div>
+                      <div class="col-md-12 mb-3">
+                    <label for="id_patronymic" class="form-label">По-батькові</label>
+                    <input type="text" class="form-control form-control-sm" id="id_patronymic"
+                        name="patronymic" placeholder="Введіть по-батькові"
+                        value="{% if form.patronymic.value %}{{form.patronymic.value}}{% endif %}">
+                        {% if form.patronymic.errors %}
+                          <div class="alert alert-danger alert-dismissible fade show">{{form.patronymic.errors}}</div>
+                        {% endif %}
+                </div>
+                  </div>
+                  <div class='row'>
+                      {% if "ПАЦІЄНТИ" in user_groups %}
+
+                      <div class="col-md-6 mb-3">
+                          <label for="id_sex" class="form-label">Стать</label>
+                          <select class="form-select" aria-label="Default select example" id="id_sex" name="sex">
+                              <option value="Ч" {% if patient_form.sex.value == "Ч" %}selected{% endif %}>Чоловік</option>
+                              <option value="Ж" {% if patient_form.sex.value == "Ж" %}selected{% endif %}>Жінка</option>
+                          </select>
+                          {% if patient_form.sex.errors %}
+                            <div class="alert alert-danger alert-dismissible fade show">{{ patient_form.sex.errors }}</div>
+                          {% endif %}
+                      </div>
+
+                      <div class="col-md-6 mb-3">
+                          <label for="id_date_of_birth" class="form-label">Дата народження</label>
+                          <input type="date" class="form-control form-control-sm" id="id_date_of_birth"
+                                 name="date_of_birth"
+                                 value="{% if patient_form.date_of_birth.value %}
+                                 {{ patient_form.date_of_birth.value }}{% endif %}">
+                          {% if patient_form.date_of_birth.errors %}
+                            <div class="alert alert-danger alert-dismissible fade show">{{ patient_form.date_of_birth.errors }}</div>
+                          {% endif %}
+                      </div>
+                      {% elif "ЛІКАРІ" in user_groups %}
+                      <div class="col-md-6 mb-2">
+                          <label for="id_stazh" class="form-label">Cтaж</label>
+                          <input type="text" class="form-control form-control-sm" id="id_stazh"
+                                 name="stazh"
+                                 value="{% if doctor_form.stazh.value %}{{doctor_form.stazh.value}}{% endif %}">
+                          {% if doctor_form.stazh.errors %}
+                            <div class="alert alert-danger alert-dismissible fade show">{{doctor_form.stazh.errors}}</div>
+                          {% endif %}
+                      </div>
+                      <div class="col-md-6 mb-2">
+                          <label for="id_specialization" class="form-label">Спеціалізація</label>
+                          <input type="text" class="form-control form-control-sm" id="id_specialization"
+                                 name="specialization"
+                                 value="{% if doctor_form.specialization.value %}{{doctor_form.specialization.value}}{% endif %}">
+                          {% if doctor_form.specialization.errors %}
+                            <div class="alert alert-danger alert-dismissible fade show">{{doctor_form.specialization.errors}}</div>
+                          {% endif %}
+                      </div>
+                      {% endif %}
+                  </div>
+                  <button type="submit" class="btn btn-outline-primary">Зберегти зміни профілю</button>
+              </div>
             </div>
-            <div class="col-md-12 mb-3">
-                <label for="id_patronymic" class="form-label">По-батькові</label>
-                <input type="text" class="form-control form-control-sm" id="id_patronymic"
-                    name="patronymic" placeholder="Введіть по-батькові"
-                    value="{% if form.patronymic.value %}{{form.patronymic.value}}{% endif %}">
-                    {% if form.patronymic.errors %}
-                      <div class="alert alert-danger alert-dismissible fade show">{{form.patronymic.errors}}</div>
-                    {% endif %}      
-            </div>
+          {% if "ЛІКАРІ" in user_groups %}
+          <div class="card-body">
+              <h4 class='font-weight-bold mb-2'>Умови прийому</h4>
+              <div class="col-md-8">
+                  <div class="form-group">
+                      <textarea class="form-control" id="id_Umovy_pryyomu"
+                        name="Umovy_pryyomu" placeholder="Умови прийому...">{{ doctor_form.Umovy_pryyomu.value }}</textarea>
+                      {% if doctor_form.Umovy_pryyomu.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show">{{doctor_form.Umovy_pryyomu.errors}}</div>
+                      {% endif %}
+                  </div>
+              </div>
+          </div>
+          {% endif %}
+
+                <div class="card-body">
+                  <h3 class='font-weight-bold'>Контактні дані</h3>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+
+                        <label for="id_email" class="form-label">Email*</label>
+                        <input type="email" class="form-control form-control-sm" id="id_email"
+                            name="email" placeholder="Ввeдіть електронну пошту"
+                            value="{{ form.email.value }}" required>
+                        {% if form.email.errors %}
+                          <div class="alert alert-danger alert-dismissible fade show">{{form.email.errors}}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="id_phone_number" class="form-label">Номер телефону*</label>
+                        <input type="text" class="form-control form-control-sm" id="id_phone_number"
+                            name="phone_number"
+                            placeholder="Ввeдіть контактний номер"
+                            value="{{ form.phone_number.value }}" required>
+                        {% if form.phone_number.errors %}
+                          <div class="alert alert-danger alert-dismissible fade show">{{form.phone_number.errors}}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
             {% if "ПАЦІЄНТИ" in user_groups%}
-            <div class='row'>
-              <div class="col-md-6 mb-3">
-                <label for="id_sex" class="form-label">Cтать</label>
-                    <select class="form-select" aria-label="Default select example" id="id_sex" name="sex">
-                      <option value="Ч" {% if form.sex.value == "Ч" %}selected{% endif %}>Чоловік</option>
-                      <option value="Ж" {% if form.sex.value == "Ж" %}selected{% endif %}>Жінка</option>
-                  </select>
-                    {% if form.sex.errors %}
-                      <div class="alert alert-danger alert-dismissible fade show">{{form.sex.errors}}</div>
-                    {% endif %}    
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="id_date_of_birth" class="form-label">Дата народження</label>
-                <input type="date" class="form-control form-control-sm" id="id_date_of_birth"
-                    name="date_of_birth"
-                    value="{% if form.date_of_birth.value %}{{form.date_of_birth.value}}{% endif %}">
-                    {% if form.date_of_birth.errors %}
-                      <div class="alert alert-danger alert-dismissible fade show">{{form.date_of_birth.errors}}</div>
-                    {% endif %}      
-            </div>
-            {% elif "ЛІКАРІ" in user_groups %}
-            <div class='row'>
-              <div class="col-md-6 mb-2">
-                <label for="id_sex" class="form-label">Cтaж</label>
-                <input type="text" class="form-control form-control-sm" id="id_date_of_birth"
-                    name="date_of_birth"
-                    value="{% if form.date_of_birth.value %}{{form.date_of_birth.value}}{% endif %}">
-                    {% if form.sex.errors %}
-                      <div class="alert alert-danger alert-dismissible fade show">{{form.sex.errors}}</div>
-                    {% endif %}    
-              </div>
-              <div class="col-md-6 mb-2">
-                <label for="id_date_of_birth" class="form-label">Спеціалізація</label>
-                <input type="text" class="form-control form-control-sm" id="id_date_of_birth"
-                    name="date_of_birth"
-                    value="{% if form.date_of_birth.value %}{{form.date_of_birth.value}}{% endif %}">
-                    {% if form.date_of_birth.errors %}
-                      <div class="alert alert-danger alert-dismissible fade show">{{form.date_of_birth.errors}}</div>
-                    {% endif %}      
-            </div>
-            {% endif %}
-          </div>
-            <button type="submit" class="btn btn-outline-primary">Зберегти зміни профілю</button>
-        </div>
-    </div>
-{% if "ЛІКАРІ" in user_groups %}
-<div class="card-body">
-  <h4 class='font-weight-bold mb-2'>Умови прийому</h4>
-    <div class="col-md-8">
-      <div class="form-group">
-        <textarea class="form-control" id="id_Umovy_pryyomu"
-            name="Umovy_pryyomu" placeholder="Умови прийому...">{{ form.Umovy_pryyomu.value }}</textarea>
-        {% if form.Umovy_pryyomu.errors %}
-          <div class="alert alert-danger alert-dismissible fade show">{{form.Umovy_pryyomu.errors}}</div>
-        {% endif %}
-      </div>
-    </div>
-</div>
-{% endif %}
 
-    <div class="card-body">
-      <h3 class='font-weight-bold'>Контактні дані</h3>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-
-            <label for="id_email" class="form-label">Email*</label>
-            <input type="email" class="form-control form-control-sm" id="id_email"
-                name="email" placeholder="Ввeдіть електронну пошту"
-                value="{{ form.email.value }}" required>
-            {% if form.email.errors %}
-              <div class="alert alert-danger alert-dismissible fade show">{{form.email.errors}}</div>
-            {% endif %}
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="id_phone_number" class="form-label">Номер телефону*</label>
-            <input type="text" class="form-control form-control-sm" id="id_phone_number"
-                name="phone_number"
-                placeholder="Ввeдіть контактний номер"
-                value="{{ form.phone_number.value }}" required>
-            {% if form.phone_number.errors %}
-              <div class="alert alert-danger alert-dismissible fade show">{{form.phone_number.errors}}</div>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-    </div>
-
-{% if "ПАЦІЄНТИ" in user_groups%}
-
-<div class="card-body">
-    <h3 class='font-weight-bold'>Місце проживання</h3>
-    <div class="row">
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="id_city" class="form-label">Місто</label>
-          <input type="text" class="form-control form-control-sm" id="id_city"
-              name="city"
-              placeholder="Ввeдіть місто проживання"
-              value="{% if form.city.value %}{{form.city.value}}{% endif %}">
-          {% if form.city.errors %}
-            <div class="alert alert-danger alert-dismissible fade show">{{form.city.errors}}</div>
-          {% endif %}
-        </div>
-      </div>
+            <div class="card-body">
+                <h3 class='font-weight-bold'>Місце проживання</h3>
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="id_city" class="form-label">Місто</label>
+                      <input type="text" class="form-control form-control-sm" id="id_city"
+                          name="city"
+                          placeholder="Ввeдіть місто проживання"
+                          value="{% if address_form.city.value %}{{address_form.city.value}}{% endif %}">
+                      {% if address_form.city.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show">{{address_form.city.errors}}</div>
+                      {% endif %}
+                    </div>
+                  </div>
 
 
 
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="id_village" class="form-label">Населений пункт</label>
-          <input type="text" class="form-control form-control-sm" id="id_village"
-              name="village"
-              placeholder="Ввeдіть населений пункт проживання"
-              value="{% if form.village.value %}{{form.village.value}}{% endif %}">
-          {% if form.village.errors %}
-            <div class="alert alert-danger alert-dismissible fade show">{{form.village.errors}}</div>
-          {% endif %}
-        </div>
-      </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="id_village" class="form-label">Населений пункт</label>
+                      <input type="text" class="form-control form-control-sm" id="id_village"
+                          name="village"
+                          placeholder="Ввeдіть населений пункт проживання"
+                          value="{% if address_form.village.value %}{{address_form.village.value}}{% endif %}">
+                      {% if address_form.village.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show">{{address_form.village.errors}}</div>
+                      {% endif %}
+                    </div>
+                  </div>
 
 
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="id_street" class="form-label">Вулиця</label>
-          <input type="text" class="form-control form-control-sm" id="id_street"
-              name="street"
-              placeholder="Ввeдіть назву вулиці"
-              value="{% if form.street.value %}{{form.street.value}}{% endif %}">
-          {% if form.street.errors %}
-            <div class="alert alert-danger alert-dismissible fade show">{{form.street.errors}}</div>
-          {% endif %}
-        </div>
-      </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="id_street" class="form-label">Вулиця</label>
+                      <input type="text" class="form-control form-control-sm" id="id_street"
+                          name="street"
+                          placeholder="Ввeдіть назву вулиці"
+                          value="{% if address_form.street.value %}{{address_form.street.value}}{% endif %}">
+                      {% if address_form.street.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show">{{address_form.street.errors}}</div>
+                      {% endif %}
+                    </div>
+                  </div>
 
 
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="id_house" class="form-label">Дім</label>
-          <input type="text" class="form-control form-control-sm" id="id_house"
-              name="house"
-              placeholder="Ввeдіть номер будинку"
-              value="{% if form.house.value %}{{form.house.value}}{% endif %}">
-          {% if form.house.errors %}
-            <div class="alert alert-danger alert-dismissible fade show">{{form.house.errors}}</div>
-          {% endif %}
-        </div>
-      </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="id_house" class="form-label">Дім</label>
+                      <input type="text" class="form-control form-control-sm" id="id_house"
+                          name="house"
+                          placeholder="Ввeдіть номер будинку"
+                          value="{% if address_form.house.value %}{{address_form.house.value}}{% endif %}">
+                      {% if address_form.house.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show">{{address_form.house.errors}}</div>
+                      {% endif %}
+                    </div>
+                  </div>
 
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="id_apartment" class="form-label">Квартира</label>
-          <input type="text" class="form-control form-control-sm" id="id_apartment"
-              name="apartment"
-              placeholder="Ввeдіть номер квартири"
-              value="{% if form.apartment.value %}{{form.apartment.value}}{% endif %}">
-          {% if form.apartment.errors %}
-            <div class="alert alert-danger alert-dismissible fade show">{{form.apartment.errors}}</div>
-          {% endif %}
-        </div>
-      </div>
-    {% endif %}
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="id_apartment" class="form-label">Квартира</label>
+                      <input type="text" class="form-control form-control-sm" id="id_apartment"
+                          name="apartment"
+                          placeholder="Ввeдіть номер квартири"
+                          value="{% if address_form.apartment.value %}{{address_form.apartment.value}}{% endif %}">
+                      {% if address_form.apartment.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show">{{address_form.apartment.errors}}</div>
+                      {% endif %}
+                    </div>
+                  </div>
+                {% endif %}
+      </form>
     </div>
   </div>
-</div> 
 </div>
-</form>
+</div>
 
 
 {% endblock dynamic_content %}

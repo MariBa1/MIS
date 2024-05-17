@@ -18,7 +18,7 @@
     {% include "includes/notification.html" %}
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <form action="{% url "auth_app:login" %}" method='POST'>
+            <form action="{% url 'auth_app:login' %}" method='POST'>
                 {% csrf_token %}
                 {% if request.GET.next %}
                     <input type="hidden" name="next" value={{request.GET.next}}>
@@ -39,7 +39,7 @@
                 <button type="submit" class="custom-button">Ввійти</button>
             </form>
             <div class="mb-3">
-                <p>Ви не зареєстровані? <a href="{% url 'auth_app:registration' %}">Реєстрація пацієнтів</a> або <a href="{% url 'auth_app:registration' %}">Реєстрація</a></p>
+                <p>Ви не зареєстровані? <a href="{% url 'auth_app:registration' %}">Реєстрація</a></p>
             </div>
                 
         </div>

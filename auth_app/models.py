@@ -10,8 +10,8 @@ class Address(models.Model):
     city = models.CharField(max_length=50, blank=True, null=True, verbose_name= 'Місто')
     village = models.CharField(max_length=50, blank=True, null=True, verbose_name= 'Населений пункт')
     street = models.CharField(max_length=50, blank=True, null=True, verbose_name= 'Вулиця')
-    house = models.PositiveIntegerField(blank=True, verbose_name= 'Будинок')
-    apartment = models.PositiveIntegerField(blank=True, verbose_name= 'Квартира')   
+    house = models.PositiveIntegerField(blank=True, null=True, verbose_name= 'Будинок')
+    apartment = models.PositiveIntegerField(blank=True, null=True, verbose_name= 'Квартира')
     class Meta:
         db_table = 'Address'
         verbose_name = 'Адресу'
@@ -89,18 +89,19 @@ class Patient(models.Model):
         verbose_name = 'Пацієнта'
         verbose_name_plural = 'Пацієнти'
     def __str__(self):
-        return f"{self.id} - {self.id_doctor}"
-    
+        return f"{self.user}"
 
 
 class FamilyDoctor(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, verbose_name='Пацієнт')
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE,verbose_name='Лікар')
-    group = models.ForeignKey(Group, on_delete=models.SET_NULL, null=True, verbose_name='Група')
+
     class Meta:
-        db_table = 'FamilyDoctor'
-        verbose_name = 'Cімейного лікаря'
-        verbose_name_plural = 'Сімейні лікарі'
+      db_table = 'FamilyDoctor'
+      verbose_name = 'Сімейного лікаря'
+      verbose_name_plural = 'Сімейні лікарі'
+      unique_together = ('patient', 'doctor')
+
     def __str__(self):
-        return f"{self.id} - {self.patient}"
+      return f"{self.doctor} - {self.patient}"
 

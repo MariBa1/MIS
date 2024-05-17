@@ -1,11 +1,20 @@
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from auth_app.models import FamilyDoctor
+
+
+@receiver(post_save, sender=FamilyDoctor)
+def create_medical_record(sender, instance, created, **kwargs):
+    if created:
+        MedCards.objects.create(patient=instance.patient, doctor=instance.doctor)
 
 
 class MedCards(models.Model):
     patient = models.OneToOneField('auth_app.Patient', on_delete=models.CASCADE, verbose_name='ID пацієнта')
-    doctor = models.ForeignKey('auth_app.Doctor', on_delete=models.SET_DEFAULT, default='Лікаря не назначено', verbose_name='ID лікаря')
-    dispensary_group = models.BooleanField(verbose_name='Диспансерна група')
-    registration_date = models.DateField(verbose_name='Поставлено на облік')
+    doctor = models.ForeignKey('auth_app.Doctor', on_delete=models.SET_NULL, blank=True, null=True, verbose_name='ID лікаря', )
+    dispensary_group = models.BooleanField(verbose_name='Диспансерна група', default=False)
+    registration_date = models.DateField(auto_now_add=True, verbose_name='Поставлено на облік')
     deregistration_date = models.DateField(blank=True, null=True, verbose_name='Знято з обліку')
     class Meta:
         db_table = 'MedCards'
@@ -17,7 +26,6 @@ class MedCards(models.Model):
         return f'{self.id:05}'
 
 
-
 class SignalMarks(models.Model):
     name = models.CharField(max_length=50, unique=True,verbose_name='Сигнальна позначка')
     id_medcard = models.ManyToManyField('MedCards', through='IndividualMarks')
@@ -27,7 +35,6 @@ class SignalMarks(models.Model):
         verbose_name_plural = 'Сигнальні позначки'
     def __str__(self):
         return f"{self.id}.{self.name}"    
-
 
 
 class IndividualMarks(models.Model):
@@ -42,7 +49,6 @@ class IndividualMarks(models.Model):
     def __str__(self):
         return f"{self.id}.{self.medcard} має позначку {self.name}"  
         
-
 
 class Vaccination(models.Model):
     name = models.CharField (max_length=100, unique=True, verbose_name='Найменування щеплення')
@@ -65,7 +71,6 @@ class Vaccination(models.Model):
         return f"{self.id}.{self.name}" 
     
 
-
 class CardVaccine(models.Model):
     date_vaccine = models.DateField(verbose_name='Дата вакцинації')
     REACTION = [
@@ -84,7 +89,6 @@ class CardVaccine(models.Model):
         return f"{self.id}.{self.medcard} - {self.date_vaccine}"         
 
 
-
 class DoctorExamination(models.Model):
     reason_for_contacting = models.CharField(max_length=100, verbose_name='Причина звернення')
     cabinet = models.CharField(max_length=10, blank=True, null=True, verbose_name='Кабінет')
@@ -98,4 +102,3 @@ class DoctorExamination(models.Model):
         verbose_name_plural = 'Записи про огляд'
     def __str__(self):
         return f"{self.id}.{self.medcard} - {self.reason_for_contacting}"
-        

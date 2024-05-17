@@ -29,27 +29,34 @@
           collapse navbar-collapse d-md-block" id="sidebarMenu">
           <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="{% url "auth_app:profile" %}">Особистий кабінет</a>
+                <a class="nav-link text-center" href="{% url 'auth_app:profile' %}">Особистий кабінет</a>
             </li>
             <hr class='hr_cards'>
             <li class="nav-item">
-                <a class="nav-link" href="{% url "auth_app:new_pass" %}">Зміна паролю</a>
+                <a class="nav-link text-center" href="{% url 'auth_app:new_pass' %}">Зміна паролю</a>
+            </li>
+            <hr class='hr_cards'>
+              {% if "ЛІКАРІ" in user_groups %}
+            <li class="nav-item">
+                <a class="nav-link text-center" href="{% url 'cards_app:all_cards' %}">Медичні картки</a>
+            </li>
+            <hr class='hr_cards'>
+              {% elif "ПАЦІЄНТИ" in user_groups or user.is_admin or user.is_staff%}
+            <li class="nav-item">
+                <h5 class="font-weight-bold mb-3 mt-3 text-center" href="">Медична карта</h5>
+            </li>
+            <hr class='hr_cards'>
+              {% endif%}
+            <li class="nav-item">
+                <a class="nav-link text-center" href="#">Загальна інформація</a>
             </li>
             <hr class='hr_cards'>
             <li class="nav-item">
-                <a class="nav-link" href="{% url "cards_app:all_cards" %}">Медична карта</a>
+              <a class="nav-link text-center" href="#">Щеплення</a>
             </li>
             <hr class='hr_cards'>
             <li class="nav-item">
-                <a class="nav-link" href="#">Загальна інформація</a>
-            </li>
-            <hr class='hr_cards'>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Щеплення</a>
-            </li>
-            <hr class='hr_cards'>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Огляд</a>
+              <a class="nav-link text-center" href="#">Огляд</a>
             </li>
           </ul>
           </div>

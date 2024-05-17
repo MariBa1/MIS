@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block dynamic_content %}
-
+{% if "ЛІКАРІ" in user_groups %}
 
     <div class="card">
       <div class="card-body">
@@ -28,5 +28,5 @@
         <a href="#" class="btn btn-outline-primary">Відкрити список</a>
       </div>
     </div>
-
+    {% endif %}
   {% endblock %}

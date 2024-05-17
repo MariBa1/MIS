@@ -68,6 +68,7 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'auth_app.context_processors.user_groups',
             ],
         },
     },
