@@ -2,42 +2,38 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.forms import ValidationError
+from django.core.validators import MinValueValidator
 from phonenumber_field.modelfields import PhoneNumberField
 
 
 
-class Address(models.Model):
-    city = models.CharField(max_length=50, blank=True, null=True, verbose_name= 'Місто')
-    village = models.CharField(max_length=50, blank=True, null=True, verbose_name= 'Населений пункт')
-    street = models.CharField(max_length=50, blank=True, null=True, verbose_name= 'Вулиця')
-    house = models.PositiveIntegerField(blank=True, null=True, verbose_name= 'Будинок')
-    apartment = models.PositiveIntegerField(blank=True, null=True, verbose_name= 'Квартира')
-    class Meta:
-        db_table = 'Address'
-        verbose_name = 'Адресу'
-        verbose_name_plural = 'Адреси'
-    def __str__(self):
-        return f"{self.id}. {self.city}, {self.street}"
-    def clean(self):
-        if self.house == 0:
-            raise ValidationError("Номер будинку повинен бути більше 0.")
-        if self.apartment == 0:
-            raise ValidationError("Номер квартири повинен бути більше 0.")
-        existing_address = Address.objects.filter(
-            city=self.city,
-            village=self.village,
-            street=self.street,
-            house=self.house,
-            apartment=self.apartment
-        ).exists()
-        if existing_address:
-            raise ValidationError("Адреса вже існує.")
+# class Address(models.Model):
+#     city = models.CharField(max_length=50, blank=True, null=True, verbose_name= 'Місто')
+#     village = models.CharField(max_length=50, blank=True, null=True, verbose_name= 'Населений пункт')
+#     street = models.CharField(max_length=50, blank=True, null=True, verbose_name= 'Вулиця')
+#     house = models.PositiveIntegerField(blank=True, null=True, verbose_name= 'Будинок', validators=[MinValueValidator(1)])
+#     apartment = models.PositiveIntegerField(blank=True, null=True, verbose_name= 'Квартира', validators=[MinValueValidator(1)])
+#     class Meta:
+#         db_table = 'Address'
+#         verbose_name = 'Адресу'
+#         verbose_name_plural = 'Адреси'
+#     def __str__(self):
+#         return f"{self.id}. {self.city}, {self.street}"
+#     def clean(self):
+#         existing_address = Address.objects.filter(
+#             city=self.city,
+#             village=self.village,
+#             street=self.street,
+#             house=self.house,
+#             apartment=self.apartment
+#         ).exists()
+#         if existing_address:
+#             raise ValidationError("Адреса вже існує.")
         
-    def save(self, *args, **kwargs):
-        if not(self.city or self.village or self.street or self.house or self.apartment):
-            print("Адреса не збережена.")
-            return
-        super().save(*args, **kwargs)
+#     def save(self, *args, **kwargs):
+#         if not(self.city or self.village or self.street or self.house or self.apartment):
+#             return
+#         super().save(*args, **kwargs)
 
 
 
@@ -80,7 +76,7 @@ class Patient(models.Model):
         ('Ж','Жінка'),]
     sex = models.CharField(blank=True, null=True, max_length=1, choices=SEX, verbose_name='Cтать')
     date_of_birth = models.DateField(blank=True, null=True, verbose_name='Дата народження')
-    address = models.ForeignKey("auth_app.Address", blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Адреса')
+    # address = models.ForeignKey("auth_app.Address", blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Адреса')
     id_doctor = models.ManyToManyField("auth_app.Doctor", 
                                         through='FamilyDoctor')
     #slug = models.SlugField(unique=True, editable=False)    

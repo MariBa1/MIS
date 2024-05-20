@@ -47,7 +47,12 @@ label.btn {
   background: transparent;
   color: #26B4FF;
 }
+.btn-outline-primary.disabled{
+  border-color: #6c757d;
+  background: #cccccc33;
+  color: #6c757d;
 
+}
 .btn {
   cursor: pointer;
 
@@ -75,25 +80,7 @@ label.btn {
   height: 1px;
   opacity: 0;
 }
-/* .account-settings-links .list-group-item.active {
-  font-weight: bold !important;
-}
 
-.account-settings-multiselect ~ .select2-container {
-  width: 100% !important;
-}
-.light-style .account-settings-links .list-group-item {
-  padding: 0.85rem 1.5rem;
-  border-color: #83c3ffd7  !important;
-}
-.light-style .account-settings-links .list-group-item.active {
-  color: #4e5155 !important;
-}
-
-.list-group .nav-link.active{
-  color: #4e5155 !important;
-  border-color: #83c3ffd7
-} */
 .title_card{
   font-weight: bold;
   padding: 0.85rem 1.5rem;
@@ -119,11 +106,8 @@ label.btn {
 
 img .img-thumbnail, .card-img-left {
   float: left;
-  height: 120px !important; 
-  padding: .25rem;
-  background-color: var(--bs-body-bg);
-  border: var(--bs-border-width) solid var(--bs-border-color);
-  border-radius: var(--bs-border-radius);
+  height: 130px !important; 
+  padding: 10px;
   max-width: 100%;}
 
   .navbar-toggler {
@@ -141,5 +125,33 @@ img .img-thumbnail, .card-img-left {
 @media (max-width: 992px) {
   img.img-fluid {
     width: 100% !important;
+  }
+}
+
+/* Медіазапит для екранів менше 991px */
+@media (max-width: 991px) {
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-items: center; /* центрування вмісту */
+    text-align: center; /* центрування тексту */
+  }
+
+  .bt-group {
+    display: flex;
+    flex-direction: column; /* кнопки одна під одною */
+    width: 100%; /* кнопки на всю ширину */
+  }
+
+  .bt-group .btn {
+    width: 100%; /* кнопки на всю ширину */
+    margin: 5px 0; /* відступ між кнопками */
+  }
+
+  .card-img-left {
+    float: none; /* знімаємо обтікання */
+    margin-right: 0; /* прибираємо правий відступ */
+    margin-bottom: 20px; /* додаємо відступ знизу */
   }
 }

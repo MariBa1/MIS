@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .forms import FamilyDoctorForm
-from .models import CustomUser, Doctor, Patient, Address, FamilyDoctor
+from .models import CustomUser, Doctor, Patient, FamilyDoctor
 
 class FamilyDoctorAdmin(admin.ModelAdmin):
   form = FamilyDoctorForm
@@ -10,6 +10,6 @@ admin.site.register(Doctor)
 admin.site.register(Patient)
 
 admin.site.register(FamilyDoctor, FamilyDoctorAdmin)
-admin.site.register(Address)
+# admin.site.register(Address)
 
 

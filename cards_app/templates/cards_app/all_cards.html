@@ -2,31 +2,48 @@
 {% load static %}
 
 {% block dynamic_content %}
-{% if "ЛІКАРІ" in user_groups %}
+  {% if "ЛІКАРІ" in user_groups %}
+    {% for pat in patient %}
+      <div class="card">
+        <div class="card-body">
+          <h5 class="font-weight-bold mb-3">{{ pat.user.last_name }} {{ pat.user.first_name }}
+            {{ pat.user.patronymic }}</h5>
 
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Боднар Владислав Романович</h5>
-        <img src='{% static "cards_app/img/images.png" %}' alt="Зображення" class="card-img-left">
-        <p class="card-text">Основна інфа про психічні травми спричинені КНУБА</p>
-        <a href="#" class="btn btn-outline-primary">Відкрити список</a>
+
+          {% if pat.user.img %}
+            <img src="{{ pat.user.img.url }}" alt="Зображення" class="card-img-left">
+          {% else %}
+            <img src="{% static 'cards_app/img/images.png' %}" alt="Зображення" class="card-img-left">
+          {% endif %}
+          
+          
+          {% if pat.id_doctor.exists %}
+            {% for doctor in pat.id_doctor.all %}
+              <p class="card-text">Cімейний лікар: {{ doctor.user.last_name }} {{ doctor.user.first_name }}
+                {{ doctor.user.patronymic }}</p>
+            {% endfor %}
+          {% else %}
+            <p class="card-text">Cімейний лікар: не призначено</p>
+          {% endif %}
+
+
+          {% if pat.medcards %}
+          <p class="card-text">ID-картки: {{ pat.medcards.display_id }}</p>
+        {% endif %}
+
+
+          <p class="card-text">Телефон пацієнта: {{ pat.user.phone_number }}</p>
+          <div class="bt-group">
+            <a href="#" class="btn btn-outline-primary" style="">Перегляд</a>
+            {% if pat in card_active_redact  %}
+            <a href="#" class="btn btn-outline-primary">Редагування</a>
+            {% else %}
+                <a href="#" class="btn btn-outline-primary disabled">Редагування</a>
+            {% endif %}
+          </div>
+
+        </div>
       </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Балобольченкова Марія Ігорівна</h5>
-        <img src='{% static "cards_app/img/images.png" %}' alt="Зображення" class="card-img-left">
-        <p class="card-text">Основна інфа про психічні травми спричинені КНУБА</p>
-        <a href="#" class="btn btn-outline-primary">Відкрити список</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Піддубний Дмитро Анатолійович</h5>
-        <img src='{% static "cards_app/img/images.png" %}' alt="Зображення" class="card-img-left">
-        <p class="card-text">Основна інфа про психічні травми спричинені КНУБА</p>
-        <a href="#" class="btn btn-outline-primary">Відкрити список</a>
-      </div>
-    </div>
-    {% endif %}
-  {% endblock %}
+    {% endfor %}
+  {% endif %}
+{% endblock %}

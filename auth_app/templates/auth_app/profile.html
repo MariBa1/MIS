@@ -74,29 +74,31 @@
                       </div>
 
                       <div class="col-md-6 mb-3">
-                          <label for="id_date_of_birth" class="form-label">Дата народження</label>
-                          <input type="date" class="form-control form-control-sm" id="id_date_of_birth"
-                                 name="date_of_birth"
-                                 value="{% if patient_form.date_of_birth.value %}
-                                 {{ patient_form.date_of_birth.value }}{% endif %}">
-                          {% if patient_form.date_of_birth.errors %}
-                            <div class="alert alert-danger alert-dismissible fade show">{{ patient_form.date_of_birth.errors }}</div>
-                          {% endif %}
-                      </div>
+                        <label for="id_date_of_birth" class="form-label">Дата народження</label>
+                        <input type="date" class="form-control form-control-sm" id="id_date_of_birth"
+                               name="date_of_birth"
+                               value="{{ patient_form.date_of_birth.value|date:'Y-m-d' }}">
+                        {% if patient_form.date_of_birth.errors %}
+                            <div class="alert alert-danger alert-dismissible fade show">
+                                {{ patient_form.date_of_birth.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
                       {% elif "ЛІКАРІ" in user_groups %}
                       <div class="col-md-6 mb-2">
                           <label for="id_stazh" class="form-label">Cтaж</label>
                           <input type="text" class="form-control form-control-sm" id="id_stazh"
-                                 name="stazh"
+                                 name="stazh" placeholder="Введіть стаж на посаді"
                                  value="{% if doctor_form.stazh.value %}{{doctor_form.stazh.value}}{% endif %}">
                           {% if doctor_form.stazh.errors %}
                             <div class="alert alert-danger alert-dismissible fade show">{{doctor_form.stazh.errors}}</div>
                           {% endif %}
                       </div>
                       <div class="col-md-6 mb-2">
-                          <label for="id_specialization" class="form-label">Спеціалізація</label>
+                          <label for="id_specialization" class="form-label">Спеціалізація*</label>
                           <input type="text" class="form-control form-control-sm" id="id_specialization"
-                                 name="specialization"
+                                 name="specialization" placeholder="Введіть свою спеціалізацію"
                                  value="{% if doctor_form.specialization.value %}{{doctor_form.specialization.value}}{% endif %}">
                           {% if doctor_form.specialization.errors %}
                             <div class="alert alert-danger alert-dismissible fade show">{{doctor_form.specialization.errors}}</div>
@@ -104,7 +106,14 @@
                       </div>
                       {% endif %}
                   </div>
-                  <button type="submit" class="btn btn-outline-primary">Зберегти зміни профілю</button>
+              
+                  {% comment %} {% if confirm %}
+                    {{ address_form.confirm }}
+                    <p>Адреса вже існує. Якщо ви впевнені, натисніть знову 'Зберегти'.</p>
+                    <button type="submit" class="btn btn-outline-primary">Зберегти</button>
+                  {% else %} {% endcomment %}
+                    <button type="submit" class="btn btn-outline-primary">Зберегти зміни профілю</button>
+                  {% comment %} {% endif %} {% endcomment %}
               </div>
             </div>
           {% if "ЛІКАРІ" in user_groups %}
@@ -153,7 +162,7 @@
                   </div>
                 </div>
 
-            {% if "ПАЦІЄНТИ" in user_groups%}
+            {% comment %} {% if "ПАЦІЄНТИ" in user_groups%}
 
             <div class="card-body">
                 <h3 class='font-weight-bold'>Місце проживання</h3>
@@ -226,7 +235,12 @@
                       {% endif %}
                     </div>
                   </div>
-                {% endif %}
+                  {% if address_form.errors %}
+                  <p>Адреса вже існує. Якщо ви впевнені, позначте чекбокс підтвердження та натисніть "Зберегти".</p>
+                  {{ address_form.confirm.label_tag }}
+                  {{ address_form.confirm }}
+              {% endif %}
+            {% endif %} {% endcomment %}
       </form>
     </div>
   </div>

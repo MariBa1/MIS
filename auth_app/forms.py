@@ -1,9 +1,10 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
-from auth_app.models import CustomUser, Patient, Doctor, Address
+from auth_app.models import CustomUser, Patient, Doctor
 from phonenumber_field.formfields import PhoneNumberField
 from django.core.validators import MinValueValidator
 from .models import FamilyDoctor
+from datetime import date, timedelta
 
 
 class FamilyDoctorForm(forms.ModelForm):
@@ -41,11 +42,6 @@ class UserRegForm(UserCreationForm):
         fields = ("first_name", "last_name", "username",
                   "email", "phone_number", "password1", "password2",)
 
-    first_name = forms.CharField()
-    last_name = forms.CharField()
-    username = forms.CharField()
-    email = forms.EmailField()
-    phone_number = forms.CharField()
     password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput())
     password2 = forms.CharField(label='Повторіть пароль', widget=forms.PasswordInput())
 
@@ -55,25 +51,24 @@ class ProfileForm(UserChangeForm):
         model = CustomUser
         fields = ("img", "first_name", "last_name",
                   "patronymic", "email", "phone_number",
-
-                  # "city", "village", "street",
-                  # "house", "apartment",
                   )
-
-    img = forms.ImageField(required=False)
-    first_name = forms.CharField()
-    last_name = forms.CharField()
-    patronymic = forms.CharField(required=False)
-    email = forms.CharField()
-    phone_number = PhoneNumberField()
-
 
 class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
         fields = ("date_of_birth", "sex",)
-
-        date_of_birth = forms.DateField(required=False)
+        date_of_birth = forms.DateField(
+        widget=forms.DateInput(attrs={'type': 'date'})
+    )
+    def clean_date_of_birth(self):
+        value = self.cleaned_data.get("date_of_birth")
+        today = date.today()
+        eighty_years_ago = today - timedelta(days=80*365.25)
+        if value and value < eighty_years_ago:
+            raise forms.ValidationError(f'Дане поле не приймає дати, менші за {eighty_years_ago}')
+        elif value and value> date.today():
+            raise forms.ValidationError(f'Дане поле не приймає дати, більші за {date.today()}' )
+        return value
 
 
 class DoctorForm(forms.ModelForm):
@@ -82,13 +77,20 @@ class DoctorForm(forms.ModelForm):
     fields = ("specialization", "stazh", "Umovy_pryyomu")
 
 
-class AddressForm(forms.ModelForm):
-  class Meta:
-    model = Address
-    fields =("city", "village", "street", "house", "apartment")
-    city = forms.CharField(required=False)
-    village = forms.CharField(required=False)
-    street = forms.CharField(required=False)
-    house = forms.IntegerField(required=False, validators=[MinValueValidator(1)])
-    apartment = forms.IntegerField(required=False, validators=[MinValueValidator(1)])
 
+# class AddressForm(forms.ModelForm):
+#   class Meta:
+#     model = Address
+#     fields =("city", "village", "street", "house", "apartment")
+    
+#   def clean(self):
+#           cleaned_data = super().clean()
+#           city = cleaned_data.get('city')
+#           village = cleaned_data.get('village')
+#           street = cleaned_data.get('street')
+#           house = cleaned_data.get('house')
+#           apartment = cleaned_data.get('apartment')
+
+#           if Address.objects.filter(city=city, village=village, street=street, house=house, apartment=apartment).exists():
+#               # raise forms.ValidationError("Адреса вже існує. Якщо ви впевнені, збережіть ще раз.")
+#               print("Адреса вже існує.")
