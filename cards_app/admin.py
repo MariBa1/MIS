@@ -4,7 +4,7 @@ from .models import MedCards, SignalMarks, IndividualMarks, Vaccination, CardVac
 
 class MedCardsAdmin(admin.ModelAdmin):
   readonly_fields = ('patient', 'doctor')
-  list_display = ('patient', 'doctor', 'dispensary_group', 'registration_date', 'deregistration_date')
+  list_display = ('id','patient', 'doctor', 'dispensary_group', 'registration_date', 'deregistration_date')
 
 
 admin.site.register(IndividualMarks)

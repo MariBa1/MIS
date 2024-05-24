@@ -1,0 +1,20 @@
+{% extends "base/base_ok.html" %}
+{% load static %}
+{% block dynamic_content %}
+{% if "ПАЦІЄНТИ" in user_groups %}
+    <div class="container mt-3">
+        <div class="alert alert-primary mx-5" role="alert">
+            <h4 class="font-weight-bold mb-3 mt-2 text-center">Iнформація не знайдена!</h4>
+            <p class="text-center">Iнформація не знайдена! Підпишіть декларацію з лікарем або зверніться до нього, щоб Вам надали доступ.</p>
+        </div>
+    </div>
+
+{% elif "ЛІКАРІ" in user_groups %}
+<div class="container mt-3">
+    <div class="alert alert-primary mx-5" role="alert">
+        <h4 class="font-weight-bold mb-3 mt-2 text-center">Iнформація не знайдена!</h4>
+        <p class="text-center">Iнформація не знайдена! Оберіть <a href = '{% url "cards_app:all_cards" %}'>потрібну медичну карту</a>.</p>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,57 @@
+[
+    {
+        "model": "cards_app.medcards",
+        "pk": 1,
+        "fields": {
+            "patient": 6,
+            "doctor": "MC-Л0002",
+            "dispensary_group": false,
+            "registration_date": "2024-05-21",
+            "deregistration_date": null
+        }
+    },
+    {
+        "model": "cards_app.medcards",
+        "pk": 2,
+        "fields": {
+            "patient": 3,
+            "doctor": "MC-Л0001",
+            "dispensary_group": true,
+            "registration_date": "2024-05-21",
+            "deregistration_date": null
+        }
+    },
+    {
+        "model": "cards_app.medcards",
+        "pk": 3,
+        "fields": {
+            "patient": 1,
+            "doctor": "MC-Л0001",
+            "dispensary_group": false,
+            "registration_date": "2024-05-21",
+            "deregistration_date": null
+        }
+    },
+    {
+        "model": "cards_app.medcards",
+        "pk": 4,
+        "fields": {
+            "patient": 2,
+            "doctor": "MC-Л0002",
+            "dispensary_group": false,
+            "registration_date": "2024-05-21",
+            "deregistration_date": null
+        }
+    },
+    {
+        "model": "cards_app.medcards",
+        "pk": 5,
+        "fields": {
+            "patient": 4,
+            "doctor": "MC-Л0001",
+            "dispensary_group": false,
+            "registration_date": "2024-05-21",
+            "deregistration_date": null
+        }
+    }
+]

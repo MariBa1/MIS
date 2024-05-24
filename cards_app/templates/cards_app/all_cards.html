@@ -1,9 +1,8 @@
 {% extends "base/base_ok.html" %}
 {% load static %}
-
 {% block dynamic_content %}
   {% if "ЛІКАРІ" in user_groups %}
-    {% for pat in patient %}
+    {% for pat in patients_with_cards%}
       <div class="card">
         <div class="card-body">
           <h5 class="font-weight-bold mb-3">{{ pat.user.last_name }} {{ pat.user.first_name }}
@@ -34,7 +33,7 @@
 
           <p class="card-text">Телефон пацієнта: {{ pat.user.phone_number }}</p>
           <div class="bt-group">
-            <a href="#" class="btn btn-outline-primary" style="">Перегляд</a>
+            <a href={% url "cards_app:index" pat.medcards.display_id %} class="btn btn-outline-primary">Перегляд</a>
             {% if pat in card_active_redact  %}
             <a href="#" class="btn btn-outline-primary">Редагування</a>
             {% else %}

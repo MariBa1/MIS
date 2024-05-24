@@ -1,0 +1,68 @@
+[
+    {
+        "model": "cards_app.vaccination",
+        "pk": 1,
+        "fields": {
+            "name": "Вітряна віспа",
+            "dose_number": 2,
+            "age": "від 9 місяців та дорослим, які ще не хворіли.",
+            "active_substance": null,
+            "input_method": "Підшкірна"
+        }
+    },
+    {
+        "model": "cards_app.vaccination",
+        "pk": 2,
+        "fields": {
+            "name": "DTaP",
+            "dose_number": 5,
+            "age": "До 7 років. Після цього віку,при відсутності вакцинації, необхідні різні вакцини.",
+            "active_substance": "Антиген дифтерії, вбиті бактерії збуднику правцю",
+            "input_method": "Внутрішньом'язова"
+        }
+    },
+    {
+        "model": "cards_app.vaccination",
+        "pk": 3,
+        "fields": {
+            "name": "Covid-19",
+            "dose_number": 2,
+            "age": "від 12 років",
+            "active_substance": "антиген",
+            "input_method": "Підшкірна"
+        }
+    },
+    {
+        "model": "cards_app.vaccination",
+        "pk": 4,
+        "fields": {
+            "name": "Гепатит В",
+            "dose_number": 3,
+            "age": "Від 6 місяців",
+            "active_substance": null,
+            "input_method": "Внутрішньом'язова"
+        }
+    },
+    {
+        "model": "cards_app.vaccination",
+        "pk": 5,
+        "fields": {
+            "name": "Гепатит А",
+            "dose_number": 2,
+            "age": "Від 6 місяців до 2 років.",
+            "active_substance": null,
+            "input_method": "Внутрішньошкірна"
+        }
+    },
+    {
+        "model": "cards_app.vaccination",
+        "pk": 6,
+        "fields": {
+            "name": "КПК",
+            "dose_number": 2,
+            "age": "Від 6 місяців до 2 років.",
+            "active_substance": null,
+            "input_method": null
+        }
+    }
+]

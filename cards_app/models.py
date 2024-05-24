@@ -2,7 +2,12 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from auth_app.models import FamilyDoctor
+from django.utils.text import slugify
 
+# @receiver(post_save, sender=FamilyDoctor)
+# def create_medical_record(sender, instance, created, **kwargs):
+#     if created:
+#         MedCards.objects.create(patient=instance.patient.user, doctor=instance.doctor)
 
 @receiver(post_save, sender=FamilyDoctor)
 def create_medical_record(sender, instance, created, **kwargs):
@@ -16,14 +21,20 @@ class MedCards(models.Model):
     dispensary_group = models.BooleanField(verbose_name='Диспансерна група', default=False)
     registration_date = models.DateField(auto_now_add=True, verbose_name='Поставлено на облік')
     deregistration_date = models.DateField(blank=True, null=True, verbose_name='Знято з обліку')
+    # slug = models.SlugField(max_length=5, unique=True, blank=True, null=True, verbose_name='URL')
     class Meta:
         db_table = 'MedCards'
         verbose_name = 'Медичну карту'
         verbose_name_plural = 'Медичні картки'
     def __str__(self):
-        return f"{self.id}."
+        return f"{self.id}"
     def display_id(self):
         return f'{self.id:05}'
+# @receiver(post_save, sender=MedCards)
+# def create_slug_for_medcard(sender, instance, created, **kwargs):
+#     if created:
+#         instance.slug = slugify(instance.display_id())
+#         instance.save()
 
 
 class SignalMarks(models.Model):
@@ -53,7 +64,7 @@ class IndividualMarks(models.Model):
 class Vaccination(models.Model):
     name = models.CharField (max_length=100, unique=True, verbose_name='Найменування щеплення')
     dose_number = models.PositiveSmallIntegerField(verbose_name='Кількість доз')
-    age = models.PositiveSmallIntegerField(verbose_name='Вік для щеплення')
+    age = models.CharField (max_length=100, verbose_name='Вік для щеплення')
     active_substance = models.CharField(max_length=100, blank=True, null=True, verbose_name='Активна речовина')
     METHOD = [
         ("Внутрішньом'язова", "Внутрішньом'язова ін'єкція"),

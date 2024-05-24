@@ -5,7 +5,7 @@
 
 
 <div class="tab-content">
-  <div class="tab-pane fade active show" id="account-general">
+  <div class="tab-pane fade active show">
     <div class="card-body media align-items-center">
       <form action="{% url 'auth_app:profile' %}" method="post" enctype="multipart/form-data">
           {% csrf_token %}
@@ -13,12 +13,10 @@
             <div class="col-md-5 mb-3 text-center">
             {% if user.img %}
                 <img src="{{ user.img.url }}"
-                    alt="Фото профіля" class="img-fluid rounded"
-                    style="max-width: 300px; max-height: 300px;">
+                    alt="Фото профіля" class="img-fluid rounded">
             {% else %}
                 <img src="{% static 'cards_app/img/images.png' %}"
-                    alt="Фото профіля" class="img-fluid rounded"
-                    style="max-width: 300px; max-height: 300px;">
+                    alt="Фото профіля" class="img-fluid rounded">
             {% endif %}
             <input type="file" class="form-control mt-3" id="id_img"
                 name='img'

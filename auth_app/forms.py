@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
+from django.contrib.auth.models import Group
 from auth_app.models import CustomUser, Patient, Doctor
 from phonenumber_field.formfields import PhoneNumberField
 from django.core.validators import MinValueValidator
@@ -56,7 +57,7 @@ class ProfileForm(UserChangeForm):
 class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
-        fields = ("date_of_birth", "sex",)
+        fields = ("user", "date_of_birth", "sex")
         date_of_birth = forms.DateField(
         widget=forms.DateInput(attrs={'type': 'date'})
     )
@@ -69,12 +70,17 @@ class PatientForm(forms.ModelForm):
         elif value and value> date.today():
             raise forms.ValidationError(f'Дане поле не приймає дати, більші за {date.today()}' )
         return value
-
+    # def __init__(self,*args, **kwargs):
+    #    super(PatientForm,self).__init__(*args, **kwargs)
+    #    self.fields['user'].queryset = CustomUser.objects.exclude(groups__name__in=["ПАЦІЄНТИ","ЛІКАРІ"]).exclude(is_staff=True)
 
 class DoctorForm(forms.ModelForm):
   class Meta:
     model = Doctor
-    fields = ("specialization", "stazh", "Umovy_pryyomu")
+    fields = ("user", "specialization", "stazh", "Umovy_pryyomu")
+  # def __init__(self,*args, **kwargs):
+  #     super(DoctorForm,self).__init__(*args, **kwargs)
+  #     self.fields['user'].queryset = CustomUser.objects.exclude(groups__name__in=["ПАЦІЄНТИ","ЛІКАРІ"]).exclude(is_staff=True)
 
 
 

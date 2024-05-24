@@ -1,0 +1,285 @@
+[
+    {
+        "model": "auth_app.customuser",
+        "pk": 1,
+        "fields": {
+            "password": "pbkdf2_sha256$600000$mGG02nnHC6VHR5z63TJyYU$/OGIqT6q4Ec1EcKT/ir01FDqGVe8jnaaWK9tV3xdy1w=",
+            "last_login": "2024-05-24T15:16:10.721Z",
+            "is_superuser": true,
+            "username": "root",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2024-05-14T11:32:00.731Z",
+            "img": "",
+            "email": "root@gmail.com",
+            "first_name": "",
+            "last_name": "",
+            "patronymic": null,
+            "phone_number": "",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth_app.customuser",
+        "pk": 2,
+        "fields": {
+            "password": "pbkdf2_sha256$600000$mZ9AZm5M66hpKnDziPJ1k4$VqSZn0IE6hNi764xhjMNwRChf89qN/bwjUH3UMLYxPk=",
+            "last_login": "2024-05-24T10:41:54.901Z",
+            "is_superuser": false,
+            "username": "Mary",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-05-14T11:35:53Z",
+            "img": "",
+            "email": "mariba0213@gmail.com",
+            "first_name": "Марія",
+            "last_name": "Балобольченко",
+            "patronymic": "Ігорівна",
+            "phone_number": "+380503953362",
+            "groups": [
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth_app.customuser",
+        "pk": 3,
+        "fields": {
+            "password": "pbkdf2_sha256$600000$FoCmPQ3h1ypVU2dYxsis1Z$Xxa0Mt0mzt8pek3zp4e/4KR2YcC2z1RupitBsA6MOKI=",
+            "last_login": "2024-05-24T10:38:07.571Z",
+            "is_superuser": false,
+            "username": "N.a.t.a",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-05-15T10:59:06Z",
+            "img": "media/Nitro_Wallpaper_07_3840x2400_OTow1AI.jpg",
+            "email": "rgdfgdg@dvdvdv.com",
+            "first_name": "Наталія",
+            "last_name": "Балобольченкова",
+            "patronymic": "Володимирівна",
+            "phone_number": "+380503953361",
+            "groups": [
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth_app.customuser",
+        "pk": 4,
+        "fields": {
+            "password": "pbkdf2_sha256$600000$VPKKZ5YX1o2INV3YvqAk7F$Nt8m5YCSs60uexqMFryzezqmoJKaQvC7VrJQGr0vCqs=",
+            "last_login": "2024-05-17T12:09:04.810Z",
+            "is_superuser": false,
+            "username": "UserPat",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-05-16T16:55:19Z",
+            "img": "",
+            "email": "rgdfgdg@dfgfgbgv.com",
+            "first_name": "Павло",
+            "last_name": "Комар",
+            "patronymic": "",
+            "phone_number": "+2434446644",
+            "groups": [
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth_app.customuser",
+        "pk": 5,
+        "fields": {
+            "password": "pbkdf2_sha256$600000$fKi7gfVu0l3cz4t3dtJRYd$n2KP/wUqPL0b0ZmAt8JPzlHApd1wg1fZQKWZm+qqZAk=",
+            "last_login": "2024-05-17T18:23:41.260Z",
+            "is_superuser": false,
+            "username": "vik123",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-05-17T07:48:20Z",
+            "img": "",
+            "email": "vik97@gmail.com",
+            "first_name": "Віктор",
+            "last_name": "Приходько",
+            "patronymic": "Йосифович",
+            "phone_number": "+380964463442",
+            "groups": [
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth_app.customuser",
+        "pk": 6,
+        "fields": {
+            "password": "pbkdf2_sha256$600000$EXuH7S9LYVxwdC02tEf9Ud$nOfUpnPfUuNZFLrN9dcqNoVYKdrhCUCxpjhi4S6ab5I=",
+            "last_login": "2024-05-17T12:09:43.137Z",
+            "is_superuser": false,
+            "username": "noname123",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-05-17T07:50:44Z",
+            "img": "",
+            "email": "noname0353@gmail.com",
+            "first_name": "Юрій",
+            "last_name": "Шуберт",
+            "patronymic": "Андрійович",
+            "phone_number": "+380932463442",
+            "groups": [
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth_app.customuser",
+        "pk": 7,
+        "fields": {
+            "password": "pbkdf2_sha256$600000$rVlmvuRTcUXdI5sMaDlO1r$ZqCYfs9QJsejZQM4Es0GkQEuh0iSPCI/l0yyjBKDERc=",
+            "last_login": "2024-05-24T10:29:40.271Z",
+            "is_superuser": false,
+            "username": "Dasha123",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-05-17T11:05:43Z",
+            "img": "",
+            "email": "da_ri@gmail.com",
+            "first_name": "Дарина",
+            "last_name": "Власенко",
+            "patronymic": "",
+            "phone_number": "+2202343440",
+            "groups": [
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth_app.customuser",
+        "pk": 8,
+        "fields": {
+            "password": "pbkdf2_sha256$600000$Ve67YGPleDAlRjft1kTAmb$cP8pB7okU1OCh3UbjZ8Gvt/hngIPQzt8i9S96ayHHgw=",
+            "last_login": "2024-05-17T20:12:51.798Z",
+            "is_superuser": false,
+            "username": "kovalenko_a",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-05-17T20:06:28Z",
+            "img": "media/images_LR5PviS_E7sJ7jM.jpg",
+            "email": "koval@ukr.net",
+            "first_name": "Антон",
+            "last_name": "Коваленко",
+            "patronymic": "",
+            "phone_number": "+380643942525",
+            "groups": [
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth_app.customuser",
+        "pk": 9,
+        "fields": {
+            "password": "pbkdf2_sha256$600000$MaaODxqydTQE6zRBno6J6Q$KuCgKaiL9xrtoKCbm0BrQ3KDXRYIJcVIyOzU+7mIdkI=",
+            "last_login": "2024-05-17T20:49:54.749Z",
+            "is_superuser": false,
+            "username": "ev_123",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-05-17T20:22:01Z",
+            "img": "media/Nitro_Wallpaper_06_3840x2400.jpg",
+            "email": "enot@gmail.com",
+            "first_name": "Євгенія",
+            "last_name": "Вишняк",
+            "patronymic": "",
+            "phone_number": "+380543953300",
+            "groups": [
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth_app.customuser",
+        "pk": 10,
+        "fields": {
+            "password": "pbkdf2_sha256$600000$lnffclCfg4H1jbAXJNzf6D$7H3cOKT0p8zGA3Pbz1i4MFI0qGfCEADeUi4VOWO3qeA=",
+            "last_login": "2024-05-23T07:06:28.111Z",
+            "is_superuser": false,
+            "username": "testdoc",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-05-23T06:50:02Z",
+            "img": "",
+            "email": "jjknjnjnjmnjl@test.net",
+            "first_name": "testdoc",
+            "last_name": "testdoc",
+            "patronymic": null,
+            "phone_number": "+380930000000",
+            "groups": [
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth_app.customuser",
+        "pk": 11,
+        "fields": {
+            "password": "pbkdf2_sha256$600000$hgwntnPmRoBTzOL6zY1IgD$vsT18Z2ygRG14mcfQSD7N2tucSQR2FTiU244sgfYQbY=",
+            "last_login": "2024-05-23T07:19:09Z",
+            "is_superuser": false,
+            "username": "doc.tor",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-05-23T07:11:48Z",
+            "img": "",
+            "email": "thhfhhg213@gmail.com",
+            "first_name": "Євген",
+            "last_name": "Тарасенко",
+            "patronymic": null,
+            "phone_number": "+380503873355",
+            "groups": [
+            ],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth_app.customuser",
+        "pk": 12,
+        "fields": {
+            "password": "pbkdf2_sha256$600000$PdbUNvjFJNOIQLdZ3XI6oP$H2hEdJZRbi/bYZ/xgSUQrWFwGsu5fCR/0HzrjcPKs9o=",
+            "last_login": "2024-05-24T15:15:24.515Z",
+            "is_superuser": false,
+            "username": "user_no_group",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-05-23T07:22:05Z",
+            "img": "",
+            "email": "lkkddffkgmf@gmail.com",
+            "first_name": "Яна",
+            "last_name": "Коваленко",
+            "patronymic": null,
+            "phone_number": "+380574536474",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth_app.customuser",
+        "pk": 13,
+        "fields": {
+            "password": "pbkdf2_sha256$600000$ZsIHqzi062dJtkeMebvL63$iAHAD6iCnPXyPtznt6v9i1jX66va2OQqMQbKnd43yHU=",
+            "last_login": "2024-05-24T15:15:52.976Z",
+            "is_superuser": false,
+            "username": "user_no_group2",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-05-24T14:40:53.888Z",
+            "img": "",
+            "email": "thfthk@rthoksrt.ua",
+            "first_name": "Владислав",
+            "last_name": "Дроб",
+            "patronymic": null,
+            "phone_number": "+380503539535",
+            "groups": [],
+            "user_permissions": []
+        }
+    }
+]

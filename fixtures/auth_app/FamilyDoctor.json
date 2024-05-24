@@ -1,0 +1,42 @@
+[
+    {
+        "model": "auth_app.familydoctor",
+        "pk": 1,
+        "fields": {
+            "patient": 6,
+            "doctor": "MC-Л0002"
+        }
+    },
+    {
+        "model": "auth_app.familydoctor",
+        "pk": 2,
+        "fields": {
+            "patient": 3,
+            "doctor": "MC-Л0003"
+        }
+    },
+    {
+        "model": "auth_app.familydoctor",
+        "pk": 3,
+        "fields": {
+            "patient": 1,
+            "doctor": "MC-Л0001"
+        }
+    },
+    {
+        "model": "auth_app.familydoctor",
+        "pk": 4,
+        "fields": {
+            "patient": 2,
+            "doctor": "MC-Л0002"
+        }
+    },
+    {
+        "model": "auth_app.familydoctor",
+        "pk": 5,
+        "fields": {
+            "patient": 5,
+            "doctor": "MC-Л0001"
+        }
+    }
+]

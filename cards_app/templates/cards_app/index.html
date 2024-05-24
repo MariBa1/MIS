@@ -1,0 +1,76 @@
+{% extends "base/base_ok.html" %}
+{% load static %}
+{% block dynamic_content %}
+
+
+<h1>Медична карта ID: {{ card.id }}</h1>
+{% comment %} <div class="tab-content"
+    <div class="tab-pane fade active show">
+      <div class="card-body media align-items-center">
+            {% for card in medcards%}
+            <div class="row">
+                <div class="col-md-5 mb-3 text-center">
+                {% if patient.user.img %}
+                    <img src="{{ patient.user.img.url }}"
+                        alt="Фото профіля" class="img-fluid rounded">
+                {% else %}
+                    <img src="{% static 'cards_app/img/images.png' %}"
+                        alt="Фото профіля" class="img-fluid rounded">
+                {% endif %}
+                </div>
+                <div class="col-md-7">
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <h5 class="font-weight-bold mb-3">{{ pat.user.last_name }} {{ pat.user.first_name }}
+                                {{ pat.user.patronymic }}</h5>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            дата реєстрації
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            дата виписки
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            {{card.id}}
+                        </div>
+                    </div>
+                      <button type="submit" class="btn btn-outline-primary">Зберегти зміни профілю</button>
+                </div>
+            </div>
+            {% endfor %}
+            {% if "ЛІКАРІ" in user_groups %}
+            <div class="card-body">
+                <h4 class='font-weight-bold mb-2'>Умови прийому</h4>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <textarea class="form-control" id="id_Umovy_pryyomu"
+                          name="Umovy_pryyomu" placeholder="Умови прийому...">{{ doctor_form.Umovy_pryyomu.value }}</textarea>
+                        {% if doctor_form.Umovy_pryyomu.errors %}
+                          <div class="alert alert-danger alert-dismissible fade show">{{doctor_form.Umovy_pryyomu.errors}}</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+  
+                  <div class="card-body">
+                    <h3 class='font-weight-bold'>Контактні дані лікаря</h3>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+  
+                            <p class="card-text">Телефон пацієнта: {{ card.user.phone_number }}</p>
+                        </div>
+                      </div>
+  
+                      <div class="col-md-6">
+                        <div class="form-group">
+                            <p class="card-text">Телефон пацієнта: {{ pat.user.phone_number }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+      </div>
+    </div>
+  </div> {% endcomment %}
+{% endblock %}>

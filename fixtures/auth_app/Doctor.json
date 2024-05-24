@@ -1,0 +1,42 @@
+[
+    {
+        "model": "auth_app.doctor",
+        "pk": "MC-Л0001",
+        "fields": {
+            "user": 3,
+            "stazh": "5 років",
+            "specialization": "Хірург",
+            "Umovy_pryyomu": "Консультація 100грн"
+        }
+    },
+    {
+        "model": "auth_app.doctor",
+        "pk": "MC-Л0002",
+        "fields": {
+            "user": 5,
+            "stazh": null,
+            "specialization": "Терапевт",
+            "Umovy_pryyomu": "Безкоштовно. Все необхідне для огляду - видається на місці"
+        }
+    },
+    {
+        "model": "auth_app.doctor",
+        "pk": "MC-Л0003",
+        "fields": {
+            "user": 10,
+            "stazh": null,
+            "specialization": "Педіатр",
+            "Umovy_pryyomu": null
+        }
+    },
+    {
+        "model": "auth_app.doctor",
+        "pk": "MC-Л0004",
+        "fields": {
+            "user": 11,
+            "stazh": null,
+            "specialization": "Терапевт",
+            "Umovy_pryyomu": null
+        }
+    }
+]
