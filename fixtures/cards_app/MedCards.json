@@ -15,7 +15,7 @@
         "pk": 2,
         "fields": {
             "patient": 3,
-            "doctor": "MC-Л0001",
+            "doctor": "MC-Л0003",
             "dispensary_group": true,
             "registration_date": "2024-05-21",
             "deregistration_date": null
@@ -47,7 +47,7 @@
         "model": "cards_app.medcards",
         "pk": 5,
         "fields": {
-            "patient": 4,
+            "patient": 5,
             "doctor": "MC-Л0001",
             "dispensary_group": false,
             "registration_date": "2024-05-21",
