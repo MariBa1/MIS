@@ -57,7 +57,7 @@ class ProfileForm(UserChangeForm):
 class PatientForm(forms.ModelForm):
     class Meta:
         model = Patient
-        fields = ("user", "date_of_birth", "sex")
+        fields = ("date_of_birth", "sex")
         date_of_birth = forms.DateField(
         widget=forms.DateInput(attrs={'type': 'date'})
     )
@@ -77,26 +77,5 @@ class PatientForm(forms.ModelForm):
 class DoctorForm(forms.ModelForm):
   class Meta:
     model = Doctor
-    fields = ("user", "specialization", "stazh", "Umovy_pryyomu")
-  # def __init__(self,*args, **kwargs):
-  #     super(DoctorForm,self).__init__(*args, **kwargs)
-  #     self.fields['user'].queryset = CustomUser.objects.exclude(groups__name__in=["ПАЦІЄНТИ","ЛІКАРІ"]).exclude(is_staff=True)
+    fields = ("specialization", "stazh", "Umovy_pryyomu")
 
-
-
-# class AddressForm(forms.ModelForm):
-#   class Meta:
-#     model = Address
-#     fields =("city", "village", "street", "house", "apartment")
-    
-#   def clean(self):
-#           cleaned_data = super().clean()
-#           city = cleaned_data.get('city')
-#           village = cleaned_data.get('village')
-#           street = cleaned_data.get('street')
-#           house = cleaned_data.get('house')
-#           apartment = cleaned_data.get('apartment')
-
-#           if Address.objects.filter(city=city, village=village, street=street, house=house, apartment=apartment).exists():
-#               # raise forms.ValidationError("Адреса вже існує. Якщо ви впевнені, збережіть ще раз.")
-#               print("Адреса вже існує.")

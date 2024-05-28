@@ -32,10 +32,6 @@
                 <a class="nav-link text-center" href="{% url 'auth_app:profile' %}">Особистий кабінет</a>
             </li>
             <hr class='hr_cards'>
-            <li class="nav-item">
-                <a class="nav-link text-center" href="{% url 'auth_app:new_pass' %}">Зміна паролю</a>
-            </li>
-            <hr class='hr_cards'>
               {% if "ЛІКАРІ" in user_groups %}
             <li class="nav-item">
                 <a class="nav-link text-center" href="{% url 'cards_app:all_cards' %}">Медичні картки</a>

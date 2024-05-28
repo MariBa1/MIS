@@ -63,6 +63,7 @@
                       <div class="col-md-6 mb-3">
                           <label for="id_sex" class="form-label">Стать</label>
                           <select class="form-select" aria-label="Default select example" id="id_sex" name="sex">
+                              <option value="" {% if not patient_form.sex.value %}selected{% endif %}>Не визначено</option>
                               <option value="Ч" {% if patient_form.sex.value == "Ч" %}selected{% endif %}>Чоловік</option>
                               <option value="Ж" {% if patient_form.sex.value == "Ж" %}selected{% endif %}>Жінка</option>
                           </select>
@@ -104,14 +105,7 @@
                       </div>
                       {% endif %}
                   </div>
-              
-                  {% comment %} {% if confirm %}
-                    {{ address_form.confirm }}
-                    <p>Адреса вже існує. Якщо ви впевнені, натисніть знову 'Зберегти'.</p>
-                    <button type="submit" class="btn btn-outline-primary">Зберегти</button>
-                  {% else %} {% endcomment %}
                     <button type="submit" class="btn btn-outline-primary">Зберегти зміни профілю</button>
-                  {% comment %} {% endif %} {% endcomment %}
               </div>
             </div>
           {% if "ЛІКАРІ" in user_groups %}
@@ -119,8 +113,7 @@
               <h4 class='font-weight-bold mb-2'>Умови прийому</h4>
               <div class="col-md-8">
                   <div class="form-group">
-                      <textarea class="form-control" id="id_Umovy_pryyomu"
-                        name="Umovy_pryyomu" placeholder="Умови прийому...">{{ doctor_form.Umovy_pryyomu.value }}</textarea>
+                      <textarea class="form-control" id="id_Umovy_pryyomu" name="Umovy_pryyomu" placeholder="Умови прийому...">{% if doctor_form.Umovy_pryyomu.value %}{{doctor_form.Umovy_pryyomu.value}}{% endif %}</textarea>
                       {% if doctor_form.Umovy_pryyomu.errors %}
                         <div class="alert alert-danger alert-dismissible fade show">{{doctor_form.Umovy_pryyomu.errors}}</div>
                       {% endif %}
@@ -159,86 +152,6 @@
                     </div>
                   </div>
                 </div>
-
-            {% comment %} {% if "ПАЦІЄНТИ" in user_groups%}
-
-            <div class="card-body">
-                <h3 class='font-weight-bold'>Місце проживання</h3>
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="id_city" class="form-label">Місто</label>
-                      <input type="text" class="form-control form-control-sm" id="id_city"
-                          name="city"
-                          placeholder="Ввeдіть місто проживання"
-                          value="{% if address_form.city.value %}{{address_form.city.value}}{% endif %}">
-                      {% if address_form.city.errors %}
-                        <div class="alert alert-danger alert-dismissible fade show">{{address_form.city.errors}}</div>
-                      {% endif %}
-                    </div>
-                  </div>
-
-
-
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="id_village" class="form-label">Населений пункт</label>
-                      <input type="text" class="form-control form-control-sm" id="id_village"
-                          name="village"
-                          placeholder="Ввeдіть населений пункт проживання"
-                          value="{% if address_form.village.value %}{{address_form.village.value}}{% endif %}">
-                      {% if address_form.village.errors %}
-                        <div class="alert alert-danger alert-dismissible fade show">{{address_form.village.errors}}</div>
-                      {% endif %}
-                    </div>
-                  </div>
-
-
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="id_street" class="form-label">Вулиця</label>
-                      <input type="text" class="form-control form-control-sm" id="id_street"
-                          name="street"
-                          placeholder="Ввeдіть назву вулиці"
-                          value="{% if address_form.street.value %}{{address_form.street.value}}{% endif %}">
-                      {% if address_form.street.errors %}
-                        <div class="alert alert-danger alert-dismissible fade show">{{address_form.street.errors}}</div>
-                      {% endif %}
-                    </div>
-                  </div>
-
-
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="id_house" class="form-label">Дім</label>
-                      <input type="text" class="form-control form-control-sm" id="id_house"
-                          name="house"
-                          placeholder="Ввeдіть номер будинку"
-                          value="{% if address_form.house.value %}{{address_form.house.value}}{% endif %}">
-                      {% if address_form.house.errors %}
-                        <div class="alert alert-danger alert-dismissible fade show">{{address_form.house.errors}}</div>
-                      {% endif %}
-                    </div>
-                  </div>
-
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="id_apartment" class="form-label">Квартира</label>
-                      <input type="text" class="form-control form-control-sm" id="id_apartment"
-                          name="apartment"
-                          placeholder="Ввeдіть номер квартири"
-                          value="{% if address_form.apartment.value %}{{address_form.apartment.value}}{% endif %}">
-                      {% if address_form.apartment.errors %}
-                        <div class="alert alert-danger alert-dismissible fade show">{{address_form.apartment.errors}}</div>
-                      {% endif %}
-                    </div>
-                  </div>
-                  {% if address_form.errors %}
-                  <p>Адреса вже існує. Якщо ви впевнені, позначте чекбокс підтвердження та натисніть "Зберегти".</p>
-                  {{ address_form.confirm.label_tag }}
-                  {{ address_form.confirm }}
-              {% endif %}
-            {% endif %} {% endcomment %}
       </form>
     </div>
   </div>

@@ -98,9 +98,3 @@ def profile(request):
 def logout(request):
     auth.logout(request)
     return redirect(reverse('main_app:index'))
-
-
-def new_pass(request):
-    return render(request, 'auth_app/new_pass.html')
-
-

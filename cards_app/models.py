@@ -2,26 +2,29 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from auth_app.models import FamilyDoctor
-from django.utils.text import slugify
 
-# @receiver(post_save, sender=FamilyDoctor)
-# def create_medical_record(sender, instance, created, **kwargs):
-#     if created:
-#         MedCards.objects.create(patient=instance.patient.user, doctor=instance.doctor)
 
 @receiver(post_save, sender=FamilyDoctor)
-def create_medical_record(sender, instance, created, **kwargs):
+def create_or_update_medical_record(sender, instance, created, **kwargs):
     if created:
+        # Створення нової медичної картки
         MedCards.objects.create(patient=instance.patient, doctor=instance.doctor)
-
+    else:
+        # Оновлення існуючої медичної картки
+        med_card = MedCards.objects.filter(patient=instance.patient).first()
+        if med_card:
+            med_card.doctor = instance.doctor
+            med_card.save()
+        else:
+            # Якщо медична картка не знайдена, створити нову
+            MedCards.objects.create(patient=instance.patient, doctor=instance.doctor)
 
 class MedCards(models.Model):
     patient = models.OneToOneField('auth_app.Patient', on_delete=models.CASCADE, verbose_name='ID пацієнта')
     doctor = models.ForeignKey('auth_app.Doctor', on_delete=models.SET_NULL, blank=True, null=True, verbose_name='ID лікаря', )
     dispensary_group = models.BooleanField(verbose_name='Диспансерна група', default=False)
-    registration_date = models.DateField(auto_now_add=True, verbose_name='Поставлено на облік')
-    deregistration_date = models.DateField(blank=True, null=True, verbose_name='Знято з обліку')
-    # slug = models.SlugField(max_length=5, unique=True, blank=True, null=True, verbose_name='URL')
+    registration_date = models.DateTimeField(auto_now_add=True, verbose_name='Поставлено на облік')
+    deregistration_date = models.DateTimeField(blank=True, null=True, verbose_name='Знято з обліку')
     class Meta:
         db_table = 'MedCards'
         verbose_name = 'Медичну карту'
@@ -30,11 +33,7 @@ class MedCards(models.Model):
         return f"{self.id}"
     def display_id(self):
         return f'{self.id:05}'
-# @receiver(post_save, sender=MedCards)
-# def create_slug_for_medcard(sender, instance, created, **kwargs):
-#     if created:
-#         instance.slug = slugify(instance.display_id())
-#         instance.save()
+
 
 
 class SignalMarks(models.Model):
@@ -58,7 +57,7 @@ class IndividualMarks(models.Model):
         verbose_name = 'Індивідуальну позначку'
         verbose_name_plural = 'Індивідуальні позначки'
     def __str__(self):
-        return f"{self.id}.{self.medcard} має позначку {self.name}"  
+        return f"{self.id}.{self.medcard} має позначку {self.signal_mark}"  
         
 
 class Vaccination(models.Model):
@@ -90,8 +89,9 @@ class CardVaccine(models.Model):
     ]
     reaction = models.CharField(choices=REACTION, max_length=20, verbose_name='Реакція на щеплення')
     contraindication  = models.CharField(max_length=300, verbose_name='Протипоказання')
+    consignment = models.CharField(max_length=20, verbose_name= 'Серія вакцини')
     medcard = models.ForeignKey('MedCards', on_delete=models.CASCADE, verbose_name='Номер медичної карти')
-    vaccination = models.ForeignKey('Vaccination', on_delete=models.CASCADE, verbose_name='Найменування щеплення')
+    vaccination = models.ForeignKey('Vaccination', on_delete=models.DO_NOTHING, verbose_name='Найменування щеплення')
     class Meta:
         db_table = 'CardVaccine'
         verbose_name = 'Щеплень в медичній карті'

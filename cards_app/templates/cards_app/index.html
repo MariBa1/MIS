@@ -3,74 +3,119 @@
 {% block dynamic_content %}
 
 
-<h1>Медична карта ID: {{ card.id }}</h1>
-{% comment %} <div class="tab-content"
-    <div class="tab-pane fade active show">
-      <div class="card-body media align-items-center">
-            {% for card in medcards%}
-            <div class="row">
-                <div class="col-md-5 mb-3 text-center">
-                {% if patient.user.img %}
-                    <img src="{{ patient.user.img.url }}"
-                        alt="Фото профіля" class="img-fluid rounded">
-                {% else %}
-                    <img src="{% static 'cards_app/img/images.png' %}"
-                        alt="Фото профіля" class="img-fluid rounded">
-                {% endif %}
-                </div>
-                <div class="col-md-7">
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <h5 class="font-weight-bold mb-3">{{ pat.user.last_name }} {{ pat.user.first_name }}
-                                {{ pat.user.patronymic }}</h5>
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            дата реєстрації
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            дата виписки
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            {{card.id}}
-                        </div>
-                    </div>
-                      <button type="submit" class="btn btn-outline-primary">Зберегти зміни профілю</button>
-                </div>
+
+<div class="tab-content">
+  <div class="tab-pane fade active show">
+
+    <div class="card-body media align-items-center">
+      <div class="row">
+        <div class="col-md-5 mb-3 text-center">
+        {% if card.patient.user.img %}
+          <img src="{{ card.patient.user.img.url }}"
+            alt="Фото профіля" class="img-fluid rounded">
+        {% else %}
+          <img src="{% static 'cards_app/img/images.png' %}"
+            alt="Фото профіля" class="img-fluid rounded">
+        {% endif %}
+        </div>
+
+        <div class="col-md-7">
+          <div class="row">
+            <div class="col-md-12 mb-3">
+              <h5 class="font-weight-bold mb-3">{{ card.patient.user.last_name }} {{ card.patient.user.first_name }}
+              {% if card.patient.user.patronymic %}{{ card.patient.user.patronymic }}</h5>{% endif %}
             </div>
-            {% endfor %}
-            {% if "ЛІКАРІ" in user_groups %}
-            <div class="card-body">
-                <h4 class='font-weight-bold mb-2'>Умови прийому</h4>
-                <div class="col-md-8">
-                    <div class="form-group">
-                        <textarea class="form-control" id="id_Umovy_pryyomu"
-                          name="Umovy_pryyomu" placeholder="Умови прийому...">{{ doctor_form.Umovy_pryyomu.value }}</textarea>
-                        {% if doctor_form.Umovy_pryyomu.errors %}
-                          <div class="alert alert-danger alert-dismissible fade show">{{doctor_form.Umovy_pryyomu.errors}}</div>
-                        {% endif %}
-                    </div>
-                </div>
+            <div class="col-md-12 mb-3">
+              Дата реєстрації: {{ card.registration_date }}
             </div>
-            {% endif %}
-  
-                  <div class="card-body">
-                    <h3 class='font-weight-bold'>Контактні дані лікаря</h3>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-  
-                            <p class="card-text">Телефон пацієнта: {{ card.user.phone_number }}</p>
-                        </div>
-                      </div>
-  
-                      <div class="col-md-6">
-                        <div class="form-group">
-                            <p class="card-text">Телефон пацієнта: {{ pat.user.phone_number }}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+            <div class="col-md-12 mb-3">
+              Дата виписки: {% if card.deregistration_date %}{{ card.deregistration_date }}{% endif %}
+            </div>
+            <div class="col-md-12 mb-3">ID-карти {{card.display_id}}</div>
+        </div>
+                      {% comment %} <button type="submit" class="btn btn-outline-primary">Зберегти зміни профілю</button> {% endcomment %}
       </div>
     </div>
-  </div> {% endcomment %}
-{% endblock %}>
+
+
+    {% comment %} <form action="{% url 'cards_app:index'card_id %}" method="post" enctype="multipart/form-data"> {% endcomment %}
+    <div class="card-body mb-4" style='background-color:#c4d4ef4e; border-radius:10px'>
+        <h4 class='font-weight-bold text-center'>Загальна інформація</h4>
+          <div class="row">
+            <div class="col-md-6 mt-2 mb-2">
+              <div class="form-group">
+                <p class="card-text">Група крові: 5+</p>
+              </div>
+            </div>
+            <div class="col-md-6 mt-2 mb-2">
+              <div class="form-group">
+                <p class="card-text">Наявна диспансерна група:</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-6 mt-2 mb-2">
+              <div class="form-group">
+                <p class="card-text">Цукровий діабет: </p>
+              </div>
+            </div>
+            <div class="col-md-6 mt-2 mb-2">
+              <div class="form-group">
+                <p class="card-text">Інфекційні захворювання:</p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mt-2 mb-2">
+              <div class="form-group">
+                <p class="card-text">Алергія: якась там хуйня+якась там хуня якась там хуйня+якась там хуня якась там хуйня+якась там хуня</p>
+              </div>
+            </div>
+            <div class="col-md-6 mt-2 mb-2">
+              <div class="form-group">
+                <p class="card-text">Хірургічні втручання: якась там хуйня+якась там хуня якась там хуйня+якась там хуня якась там хуйня+якась там хуня</p>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <div class="card-body mb-4" style='background-color:#c4d4ef4e; border-radius:10px'>
+        <h4 class='font-weight-bold text-center'>Контактні дані пацієнта</h4>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <p class="card-text">Телефон: {{ card.patient.user.phone_number }}</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <p class="card-text">E-mail: {{ card.patient.user.email }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% comment %} </form> {% endcomment %}
+
+    <div class="card-body m-3" style='background-color:#c4d4ef4e; border-radius:10px'>
+      <h4 class='font-weight-bold text-center'>Контактні дані сімейного лікаря</h4>
+      <h5 class="card-text mt-3 text-center">{{ card.doctor.user.last_name }} {{ card.doctor.user.first_name }}
+      {% if card.doctor.user.patronymic %}{{ card.doctor.user.patronymic }}</h5>{% endif %}
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <p class="card-text">Телефон: {{ card.doctor.user.phone_number }}</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <p class="card-text">E-mail: {{ card.doctor.user.email }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

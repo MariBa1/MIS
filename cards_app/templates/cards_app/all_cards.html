@@ -6,41 +6,35 @@
       <div class="card">
         <div class="card-body">
           <h5 class="font-weight-bold mb-3">{{ pat.user.last_name }} {{ pat.user.first_name }}
-            {{ pat.user.patronymic }}</h5>
+            {% if pat.user.patronymic %}{{ pat.user.patronymic }}{% endif %}</h5>
 
 
-          {% if pat.user.img %}
-            <img src="{{ pat.user.img.url }}" alt="Зображення" class="card-img-left">
-          {% else %}
-            <img src="{% static 'cards_app/img/images.png' %}" alt="Зображення" class="card-img-left">
-          {% endif %}
-          
+            {% if pat.user.img %}
+              <img src="{{ pat.user.img.url }}" alt="Зображення" class="card-img-left">
+            {% else %}
+              <img src="{% static 'cards_app/img/images.png' %}" alt="Зображення" class="card-img-left">
+            {% endif %}
           
           {% if pat.id_doctor.exists %}
             {% for doctor in pat.id_doctor.all %}
               <p class="card-text">Cімейний лікар: {{ doctor.user.last_name }} {{ doctor.user.first_name }}
-                {{ doctor.user.patronymic }}</p>
+              {% if doctor.user.patronymic %}{{ doctor.user.patronymic }}{% endif %}</p>
             {% endfor %}
           {% else %}
             <p class="card-text">Cімейний лікар: не призначено</p>
           {% endif %}
 
-
-          {% if pat.medcards %}
-          <p class="card-text">ID-картки: {{ pat.medcards.display_id }}</p>
-        {% endif %}
-
+          {% if pat.medcards %}<p class="card-text">ID-картки: {{ pat.medcards.display_id }}</p>{% endif %}
 
           <p class="card-text">Телефон пацієнта: {{ pat.user.phone_number }}</p>
           <div class="bt-group">
             <a href={% url "cards_app:index" pat.medcards.display_id %} class="btn btn-outline-primary">Перегляд</a>
             {% if pat in card_active_redact  %}
-            <a href="#" class="btn btn-outline-primary">Редагування</a>
+              <a href="#" class="btn btn-outline-primary">Редагування</a>
             {% else %}
-                <a href="#" class="btn btn-outline-primary disabled">Редагування</a>
+              <a href="#" class="btn btn-outline-primary disabled">Редагування</a>
             {% endif %}
           </div>
-
         </div>
       </div>
     {% endfor %}
