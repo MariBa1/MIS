@@ -3,9 +3,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
-from django.views.generic import DeleteView
 from auth_app.models import Patient,  Doctor
-from cards_app.forms import CardVaccineForm
+from cards_app.forms import CardVaccineForm, MedCardsForm
 from cards_app.models import CardVaccine, IndividualMarks, MedCards
 
 
@@ -81,34 +80,25 @@ def index(request, card_id):
     card = get_object_or_404(MedCards.objects.select_related('patient', 
                                             'patient__user', 'doctor', 'doctor__user').prefetch_related('individualmarks_set'),  id=card_id)
     individual_marks = IndividualMarks.objects.filter(medcard=card)
+    current_user = request.user
+    doctor = card.doctor.user if card.doctor else None
+    can_edit = doctor == current_user
+
+    if request.method == 'POST':
+        form = MedCardsForm(request.POST, instance=card)
+        if form.is_valid():
+            form.save()
+            return redirect('cards_app:index', card_id=card.id)
+    else:
+        form = MedCardsForm(instance=card)
     context = {
         'card': card,
-        'individual_marks':individual_marks,
+        'can_edit': can_edit,
+        'individual_marks': individual_marks,
+        'form': form,
     }
-    if request.method == 'POST':
-        deregistration_date = request.POST.get('deregistration_date')
-        if deregistration_date:
-            if card.deregistration_date:
-                # Порівняємо нове значення дерегістрації з існуючим
-                if deregistration_date != card.deregistration_date.strftime('%Y-%m-%dT%H:%M'):
-                    # Якщо значення змінилося, оновлюємо поле і зберігаємо в базі
-                    card.deregistration_date = deregistration_date
-                    card.save()
-            else:
-                # Якщо поле deregistration_date ще не має значення, зберігаємо його у базі
-                card.deregistration_date = deregistration_date
-                card.save()
-            # Перенаправляємо, щоб уникнути повторної відправки форми
-            return redirect('cards_app:index', card_id)
-
-    # Додана обробка для дереєстрації
-    if card.deregistration_date:
-        context['deregistration_date'] = card.deregistration_date.strftime('%Y-%m-%dT%H:%M')
-
+    
     return render(request, 'cards_app/index.html', context)
-
-
-
 
 @login_required
 def vaccine(request, card_id):
