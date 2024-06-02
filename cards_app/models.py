@@ -89,7 +89,7 @@ class CardVaccine(models.Model):
     ]
     reaction = models.CharField(choices=REACTION, max_length=20, verbose_name='Реакція на щеплення')
     contraindication  = models.CharField(max_length=300, verbose_name='Протипоказання')
-    consignment = models.CharField(max_length=20, verbose_name= 'Серія вакцини')
+    product_series = models.CharField(max_length=20, verbose_name= 'Серія вакцини')
     medcard = models.ForeignKey('MedCards', on_delete=models.CASCADE, verbose_name='Номер медичної карти')
     vaccination = models.ForeignKey('Vaccination', on_delete=models.DO_NOTHING, verbose_name='Найменування щеплення')
     class Meta:

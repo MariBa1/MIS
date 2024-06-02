@@ -28,11 +28,10 @@
 
           <p class="card-text">Телефон пацієнта: {{ pat.user.phone_number }}</p>
           <div class="bt-group">
-            <a href={% url "cards_app:index" pat.medcards.display_id %} class="btn btn-outline-primary">Перегляд</a>
             {% if pat in card_active_redact  %}
-              <a href="#" class="btn btn-outline-primary">Редагування</a>
+              <a href={% url "cards_app:index" pat.medcards.display_id %} class="btn btn-outline-primary">Перегляд та редагування</a>
             {% else %}
-              <a href="#" class="btn btn-outline-primary disabled">Редагування</a>
+              <a href={% url "cards_app:index" pat.medcards.display_id %} class="btn btn-outline-primary">Перегляд</a>
             {% endif %}
           </div>
         </div>

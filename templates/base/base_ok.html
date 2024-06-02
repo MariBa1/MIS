@@ -53,15 +53,7 @@
                 {% endif %}
               </li>
             <hr class='hr_cards'>
-            <li class="nav-item">
-              {% if card %}
-              <a class="nav-link text-center" href="{% url 'cards_app:examination' card.display_id%}">Огляд</a>
-              {% else %}
-              <a class="nav-link text-center" href="{% url 'cards_app:error' %}">Огляд</a>
-              {% endif %}
-            </li>
 
-            
             {% elif "ПАЦІЄНТИ" in user_groups or user.is_admin or user.is_staff%}
             <li class="nav-item">
                 <h5 class="font-weight-bold mb-3 mt-3 text-center" href="">Медична карта</h5>
@@ -73,10 +65,6 @@
             <hr class='hr_cards'>
             <li class="nav-item">
               <a class="nav-link text-center" href="{% url 'cards_app:vaccine_profile'%}">Щеплення</a>
-            </li>
-            <hr class='hr_cards'>
-            <li class="nav-item">
-              <a class="nav-link text-center" href="{% url 'cards_app:examination_profile'%}">Огляд</a>
             </li>
             {% endif %}
           </ul>

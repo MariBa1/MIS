@@ -1,81 +1,49 @@
- {% extends "base/base_ok.html" %}
+{% extends "base/base_ok.html" %}
 {% load static %}
-{% block dynamic_content %}
-<table class="table table-hover">
-  <thead>
-    <tr class='font-weight-bold'>
-      <th scope="col">#</th>
-      <th scope="col">Назва вакцини</th>
-      <th scope="col">Дата</th>
-      <th scope="col">Серія</th>
-      <th scope="col">Реакція</th>
-      <th scope="col">Протипоказання</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for record in card_vaccinations %}
-    <tr>
-      <th class='font-weight-bold'>{{ record.id }}</th>
-      <td>{{ record.vaccination.name }}</td>
-      <td>{{ record.date_vaccine }}</td>
-      <td>{{ record.consignment }}</td>
-      <td>{{ record.reaction }}</td>
-      <td>{{ record.contraindication }}</td>
-    </tr>
-    {% endfor %}
-    {% if "ЛІКАРІ" in user_groups %}
-    <tr>
-      <th scope="row">+</th>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    
-    {% endif %}
-    {% if can_edit %}
-    <td>
-      {% comment %} <a href="{% url 'edit_vaccine' record.id %}" class="btn btn-warning btn-sm">Редагувати</a>
-      <a href="{% url 'delete_vaccine' record.id %}" class="btn btn-danger btn-sm">Видалити</a>{% endif %} {% endcomment %}
-      <a href='#' class="btn btn-warning btn-sm">Редагувати</a>
-      <a href="#" class="btn btn-danger btn-sm">Видалити</a>{% endif %}
-    </td></tr>
-  </tbody>
-</table>
 
-{% comment %}
-<table class="table table-hover">
-    <thead>
-      <tr class='font-weight-bold'>
-        <th scope="col">#</th>
-        <th scope="col">Назва вакцини</th>
-        <th scope="col">Дата</th>
-        <th scope="col">Серія</th>
-        <th scope="col">Реакція</th>
-        <th scope="col">Протипоказання</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for record in card_vaccinations %}
-      <tr>
-        <th class='font-weight-bold'>{{record.id}}</th>
-        <td>{{record.vaccination.name}}</td>
-        <td>{{record.date_vaccine}}</td>
-        <td>{{record.consignment}}</td>
-        <td>{{record.reaction}}</td>
-        <td>{{record.contraindication}}</td>
-      </tr>
-      {% endfor %}
-      <tr>
-        <th scope="row">2</th>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      
-    </tbody>
-  </table>{% endcomment %}
-{% endblock %} 
+{% block css %}
+  <style>
+    .table-responsive {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch; /* Додає інерційну прокрутку на iOS */
+    }
+  </style>
+{% endblock %}
+
+{% block dynamic_content %}
+<div class="table-responsive">
+  <form method="post" action="{% url 'cards_app:delete_vaccine' card.id %}">
+    {% csrf_token %}
+    <table class="table table-hover">
+      <thead>
+        <tr class='font-weight-bold'>
+          <th scope="col">.</th>
+          <th scope="col">#</th>
+          <th scope="col">Назва вакцини</th>
+          <th scope="col">Дата</th>
+          <th scope="col">Серія</th>
+          <th scope="col">Реакція</th>
+          <th scope="col">Протипоказання</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for record in card_vaccinations %}
+        <tr>
+          <td><input type="checkbox" name="vaccination_ids" value="{{ record.id }}"></td>
+          <th class='font-weight-bold'>{{ forloop.counter }}</th>
+          <td>{{ record.vaccination.name }}</td>
+          <td>{{ record.date_vaccine }}</td>
+          <td>{{ record.product_series }}</td>
+          <td>{{ record.reaction }}</td>
+          <td>{{ record.contraindication }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% if can_edit %}
+      <button type="submit" class="custom-button">Видалити вибрані</button>
+      <a href="{% url 'cards_app:add_vaccine' card.id %}" class="custom-button">Додати</a>
+    {% endif %}
+  </form>
+</div>
+{% endblock %}

@@ -1,9 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
-from django.contrib.auth.models import Group
 from auth_app.models import CustomUser, Patient, Doctor
-from phonenumber_field.formfields import PhoneNumberField
-from django.core.validators import MinValueValidator
 from .models import FamilyDoctor
 from datetime import date, timedelta
 

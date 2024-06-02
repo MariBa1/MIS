@@ -1,12 +1,14 @@
+import logging
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-# from django.urls import reverse
-# from auth_app.context_processors import user_groups
-# from .forms import CardVaccineForm  # Ваші форми для роботи з вакцинаціями
-from auth_app.context_processors import user_groups
-from auth_app.models import Patient, CustomUser, Doctor, FamilyDoctor
-from cards_app.models import CardVaccine, MedCards, Vaccination
+from django.urls import reverse
+from django.views.generic import DeleteView
+from auth_app.models import Patient,  Doctor
+from cards_app.forms import CardVaccineForm
+from cards_app.models import CardVaccine, IndividualMarks, MedCards
+
+
 
 @login_required
 def all_cards(request):
@@ -26,16 +28,24 @@ def all_cards(request):
 
 
 @login_required
+def not_card(request):
+    return render(request, 'cards_app/not_card.html')
+
+################ Пацієнти ##############
+
+@login_required
 def card_profile(request):
     user = request.user
     try:
         patient = get_object_or_404(Patient, user=user)
         card = get_object_or_404(MedCards.objects.select_related('patient', 
-                                            'patient__user', 'doctor', 'doctor__user'),patient=patient)
+                                            'patient__user', 'doctor', 'doctor__user').prefetch_related('individualmarks_set'),patient=patient)
+        individual_marks = IndividualMarks.objects.filter(medcard=card)
         context = {
                 'user': user,
                 'patient': patient,
                 'card': card,
+                'individual_marks':individual_marks,
             }
         return render(request, 'cards_app/index.html', context)
     except Http404:
@@ -63,17 +73,43 @@ def vaccine_profile(request):
 
 
 
-# def vaccine(request, card_id):
-#     card = get_object_or_404(MedCards.objects.select_related('patient', 
-#                                             'patient__user', 'doctor', 'doctor__user'),  id=card_id)
-#     card_vaccinations = CardVaccine.objects.filter(medcard=card)
-#     doctor = card.doctor.user
-#     context = {
-#         'card': card,
-#         'doctor':doctor,
-#         'card_vaccinations': card_vaccinations,
-#     }
-#     return render(request, 'cards_app/vaccine.html', context)
+
+
+
+@login_required
+def index(request, card_id):
+    card = get_object_or_404(MedCards.objects.select_related('patient', 
+                                            'patient__user', 'doctor', 'doctor__user').prefetch_related('individualmarks_set'),  id=card_id)
+    individual_marks = IndividualMarks.objects.filter(medcard=card)
+    context = {
+        'card': card,
+        'individual_marks':individual_marks,
+    }
+    if request.method == 'POST':
+        deregistration_date = request.POST.get('deregistration_date')
+        if deregistration_date:
+            if card.deregistration_date:
+                # Порівняємо нове значення дерегістрації з існуючим
+                if deregistration_date != card.deregistration_date.strftime('%Y-%m-%dT%H:%M'):
+                    # Якщо значення змінилося, оновлюємо поле і зберігаємо в базі
+                    card.deregistration_date = deregistration_date
+                    card.save()
+            else:
+                # Якщо поле deregistration_date ще не має значення, зберігаємо його у базі
+                card.deregistration_date = deregistration_date
+                card.save()
+            # Перенаправляємо, щоб уникнути повторної відправки форми
+            return redirect('cards_app:index', card_id)
+
+    # Додана обробка для дереєстрації
+    if card.deregistration_date:
+        context['deregistration_date'] = card.deregistration_date.strftime('%Y-%m-%dT%H:%M')
+
+    return render(request, 'cards_app/index.html', context)
+
+
+
+
 @login_required
 def vaccine(request, card_id):
     card = get_object_or_404(MedCards.objects.select_related('patient', 'patient__user', 'doctor', 'doctor__user'), id=card_id)
@@ -89,47 +125,39 @@ def vaccine(request, card_id):
     }
     
     return render(request, 'cards_app/vaccine.html', context)
+
+
 @login_required
-def examination_profile(request):
-    user = request.user
-    try:
-        patient = get_object_or_404(Patient, user=user)
-        card = get_object_or_404(MedCards.objects.select_related('patient', 
-                                            'patient__user', 'doctor', 'doctor__user'),patient=patient)
-        context = {
-                'user': user,
-                'patient': patient,
-                'card': card,
-            }
-        return render(request, 'cards_app/examination.html', context)
-    except Http404:
-        return render(request, 'cards_app/not_card.html')
+def add_vaccine(request, card_id):
+    card = get_object_or_404(MedCards, id=card_id)
+
+    if request.method == 'POST':
+        form = CardVaccineForm(request.POST)
+        if form.is_valid():
+            card_vaccine = form.save(commit=False)
+            card_vaccine.medcard = card  # Присвоюємо медичну карту
+            card_vaccine.save()
+            return HttpResponseRedirect(reverse('cards_app:vaccine', args=[card.id]))  # Перенаправлення після успішного збереження
+    else:
+        form = CardVaccineForm()
+
+    return render(request, 'cards_app/add_vaccine.html', {'form': form, 'card': card})
+
+
+
+@login_required
+def delete_vaccine(request, card_id):
+    card = get_object_or_404(MedCards, id=card_id)
+    if request.method == 'POST':
+        logging.info(f"POST request received for card ID: {card_id}")
+        vaccination_ids = request.POST.getlist('vaccination_ids')
+        if vaccination_ids:
+            logging.info(f"Deleting vaccinations with IDs: {vaccination_ids}")
+            CardVaccine.objects.filter(id__in=vaccination_ids, medcard=card).delete()
+        else:
+            logging.info("No vaccination IDs to delete")
+        return HttpResponseRedirect(reverse('cards_app:vaccine', args=[card.id]))
+    else:
+        logging.info("Request method is not POST")
     
-
-@login_required
-def not_card(request):
-    return render(request, 'cards_app/not_card.html')
-
-
-@login_required
-def index(request, card_id):
-    card = get_object_or_404(MedCards.objects.select_related('patient', 
-                                            'patient__user', 'doctor', 'doctor__user'),  id=card_id)
-    context = {
-        'card': card,
-    }
-    return render(request, 'cards_app/index.html', context)
-
-
-@login_required
-def examination(request, card_id):
-    card = get_object_or_404(MedCards.objects.select_related('patient', 
-                                            'patient__user', 'doctor', 'doctor__user'),  id=card_id)
-    context = {
-        'card': card,
-    }
-    return render(request, 'cards_app/examination.html', context)
-
-
-
-
+    return redirect('cards_app:vaccine', card_id=card.id)

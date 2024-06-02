@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import MedCards, SignalMarks, IndividualMarks, Vaccination, CardVaccine, DoctorExamination
+from .models import MedCards, SignalMarks, IndividualMarks, Vaccination, CardVaccine
 
 
 class MedCardsAdmin(admin.ModelAdmin):
@@ -12,4 +12,3 @@ admin.site.register(MedCards, MedCardsAdmin)
 admin.site.register(SignalMarks)
 admin.site.register(Vaccination)
 admin.site.register(CardVaccine)
-admin.site.register(DoctorExamination)

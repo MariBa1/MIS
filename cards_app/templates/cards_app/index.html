@@ -1,6 +1,7 @@
 {% extends "base/base_ok.html" %}
 {% load static %}
 {% block dynamic_content %}
+{% load custom_filters %}
 
 
 
@@ -28,58 +29,129 @@
             <div class="col-md-12 mb-3">
               Дата реєстрації: {{ card.registration_date }}
             </div>
+
+
+
+            {% if "ЛІКАРІ" in user_groups %}
+            <form method='POST'>
+              {% csrf_token %}
+              <div class="row">
+                  <div class="col-md-4">
+                      <label for="id_deregistration_date" class="form-label">Дата виписки:</label>
+                  </div>
+                  <div class="col-md-5">
+                      <input type="datetime-local" class="form-control form-control" id="id_deregistration_date"
+                          name="deregistration_date"
+                          value="{{ card.deregistration_date|date:'Y-m-d' }}T{{ card.deregistration_date|time:'H:i' }}">
+                  </div>
+              </div>
+              {% if card.deregistration_date.errors %}
+                  <div class="alert alert-danger alert-dismissible fade show">
+                      {{ card.deregistration_date.errors }}
+                  </div>
+              {% endif %}
+              <button type="submit" class="btn btn-outline-primary mt-3 mb-3">Зберегти зміни профілю</button> 
+          </form>
+            {% elif "ПАЦІЄНТИ" in user_groups %}
             <div class="col-md-12 mb-3">
               Дата виписки: {% if card.deregistration_date %}{{ card.deregistration_date }}{% endif %}
             </div>
+            {% endif %}
             <div class="col-md-12 mb-3">ID-карти {{card.display_id}}</div>
         </div>
-                      {% comment %} <button type="submit" class="btn btn-outline-primary">Зберегти зміни профілю</button> {% endcomment %}
       </div>
     </div>
 
 
-    {% comment %} <form action="{% url 'cards_app:index'card_id %}" method="post" enctype="multipart/form-data"> {% endcomment %}
+    
     <div class="card-body mb-4" style='background-color:#c4d4ef4e; border-radius:10px'>
         <h4 class='font-weight-bold text-center'>Загальна інформація</h4>
           <div class="row">
+
             <div class="col-md-6 mt-2 mb-2">
               <div class="form-group">
-                <p class="card-text">Група крові: 5+</p>
+                <p class="card-text">
+                  <strong>Група крові:</strong>
+                  {% for mark in individual_marks %}
+                    {% if mark.signal_mark.name == "Група крові" %}
+                      <span class="card-text">{{ mark.value }}</span>
+                    {% endif %}
+                  {% endfor %}
+                  {% for mark in individual_marks %}
+                  {% if mark.signal_mark.name == "Резус" %}
+                    <span class="card-text">{{ mark.value }}</span>
+                  {% endif %}
+                {% endfor %}
+                </p>
               </div>
             </div>
+
             <div class="col-md-6 mt-2 mb-2">
               <div class="form-group">
-                <p class="card-text">Наявна диспансерна група:</p>
+                <p class="card-text"><strong>Диспансерна група:</strong>{{card.dispensary_group |yesno:"✔,✘"}}</p>
               </div>
             </div>
           </div>
           
+
           <div class="row">
             <div class="col-md-6 mt-2 mb-2">
               <div class="form-group">
-                <p class="card-text">Цукровий діабет: </p>
+                <p class="card-text">
+                  <strong>Цукровий діабет:</strong>
+                  {% for mark in individual_marks %}
+                    {% if mark.signal_mark.name == "Цукровий діабет" %}
+                      <span class="card-text">{{ mark.value |custom_yesno }}</span>
+                    {% endif %}
+                  {% endfor %}
+                </p>
               </div>
             </div>
             <div class="col-md-6 mt-2 mb-2">
               <div class="form-group">
-                <p class="card-text">Інфекційні захворювання:</p>
+                <p class="card-text">
+                  <strong>Інфекційні захворювання:</strong>
+                  {% for mark in individual_marks %}
+                    {% if mark.signal_mark.name == "Інфекційні захворювання" %}
+                      <span class="card-text">{{ mark.value |custom_yesno}}</span>
+                    {% endif %}
+                  {% endfor %}
+                </p>
               </div>
             </div>
           </div>
+
+
+
           <div class="row">
             <div class="col-md-6 mt-2 mb-2">
               <div class="form-group">
-                <p class="card-text">Алергія: якась там хуйня+якась там хуня якась там хуйня+якась там хуня якась там хуйня+якась там хуня</p>
+                <p class="card-text">
+                  <strong>Алергії:</strong>
+                  {% for mark in individual_marks %}
+                    {% if mark.signal_mark.name == "Алергії" %}
+                      <span class="card-text">{{ mark.value |custom_yesno}}</span>
+                    {% endif %}
+                  {% endfor %}
+                </p>
               </div>
             </div>
             <div class="col-md-6 mt-2 mb-2">
               <div class="form-group">
-                <p class="card-text">Хірургічні втручання: якась там хуйня+якась там хуня якась там хуйня+якась там хуня якась там хуйня+якась там хуня</p>
+                <p class="card-text">
+                  <strong>Хірургічні втручання:</strong>
+                  {% for mark in individual_marks %}
+                    {% if mark.signal_mark.name == "Хірургічні втручання" %}
+                      <span class="card-text">{{ mark.value |custom_yesno}}</span>
+                    {% endif %}
+                  {% endfor %}
+                </p>
               </div>
             </div>
           </div>
       </div>
 
+      {% if "ЛІКАРІ" in user_groups %}
       <div class="card-body mb-4" style='background-color:#c4d4ef4e; border-radius:10px'>
         <h4 class='font-weight-bold text-center'>Контактні дані пацієнта</h4>
           <div class="row">
@@ -95,10 +167,10 @@
             </div>
           </div>
         </div>
+        {% endif %}
       </div>
-    {% comment %} </form> {% endcomment %}
 
-    <div class="card-body m-3" style='background-color:#c4d4ef4e; border-radius:10px'>
+    <div class="card-body m-1" style='background-color:#c4d4ef4e; border-radius:10px'>
       <h4 class='font-weight-bold text-center'>Контактні дані сімейного лікаря</h4>
       <h5 class="card-text mt-3 text-center">{{ card.doctor.user.last_name }} {{ card.doctor.user.first_name }}
       {% if card.doctor.user.patronymic %}{{ card.doctor.user.patronymic }}</h5>{% endif %}
