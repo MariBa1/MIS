@@ -52,8 +52,9 @@
     </table>
     {% if can_edit %}
       <button type="submit" class="custom-button">Видалити вибрані</button>
-      <a href="{% url 'cards_app:add_vaccine' card.id %}" class="custom-button">Додати</a>
-    {% endif %}
+      {% endif %}
+      <a href="{% url 'cards_app:add_vaccine' card.display_id %}" class="custom-button">Додати</a>
+    
   </form>
 </div>
 {% endblock %}

@@ -10,7 +10,7 @@
 
                 <div class="mb-3">
                     <label for="id_vaccination" class="form-label">Вакцина</label>
-                    <select class="form-select" name="vaccination" id="id_vaccination" required>
+                    <select class="form-select" name="vaccination" id="id_vaccination">
                         <option value="">Не визначено</option>
                         {% for vaccine in form.fields.vaccination.queryset %}
                             <option value="{{ vaccine.id }}" {% if form.vaccination.value == vaccine.id %}selected{% endif %}>
@@ -22,7 +22,8 @@
 
                 <div class="mb-3">
                     <label class="form-label">Серія вакцини</label>
-                    <input type='text' name="product_series" placeholder="Введіть серійний номер" class="form-control">
+                    <input type='text' name="product_series" placeholder="Введіть серійний номер" class="form-control"
+                     value="{% if form.product_series.value %}{{ form.product_series.value }}{% endif %}">
                     {% if form.product_series.errors %}
                         <div class="alert alert-danger alert-dismissible fade show">
                             {{form.product_series.errors}}</div>
@@ -31,12 +32,12 @@
 
                 <div class="mb-3">
                     <label class="form-label">Протипоказання</label>
-                    <textarea type='text' name='contraindication' placeholder="Введіть застереження при введені вакцини"
-                    class="form-control"></textarea>
+                    <textarea name='contraindication' placeholder="Введіть застереження при введені вакцини" class="form-control">{% if form.contraindication.value %}{{ form.contraindication.value }}{% endif %}</textarea>
                     {% if form.contraindication.errors %}
-                    <div class="alert alert-danger alert-dismissible fade show">
-                        {{form.contraindication.errors}}</div>
-                {% endif %}
+                        <div class="alert alert-danger alert-dismissible fade show">
+                            {{ form.contraindication.errors }}
+                        </div>
+                    {% endif %}
                 </div>
 
                 <div class="mb-3">
@@ -54,7 +55,8 @@
 
                 <div class="mb-3">
                     <label class="form-label">Дата</label>
-                    <input type='date' name = 'date_vaccine' placeholder="Введіть дату вакцинації" class="form-control">
+                    <input type='date' name = 'date_vaccine' placeholder="Введіть дату вакцинації" class="form-control"
+                    value="{% if form.date_vaccine.value %}{{ form.date_vaccine.value }}{% endif %}">
                     {% if form.date_vaccine.errors %}
                         <div class="alert alert-danger alert-dismissible fade show">
                             {{form.date_vaccine.errors}}</div>

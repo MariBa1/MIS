@@ -1,8 +1,5 @@
-# from django.contrib.auth.models import Group
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-# from django.forms import ValidationError
-# from django.core.validators import MinValueValidator
 from phonenumber_field.modelfields import PhoneNumberField
 
 class CustomUser(AbstractUser): 
@@ -43,7 +40,6 @@ class Patient(models.Model):
         ('Ж','Жінка'),]
     sex = models.CharField(blank=True, null=True, max_length=1, choices=SEX, verbose_name='Cтать')
     date_of_birth = models.DateField(blank=True, null=True, verbose_name='Дата народження')
-    # address = models.ForeignKey("auth_app.Address", blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Адреса')
     id_doctor = models.ManyToManyField("auth_app.Doctor", 
                                         through='FamilyDoctor')
     class Meta:

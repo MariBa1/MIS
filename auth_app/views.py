@@ -5,7 +5,6 @@ from django.contrib import auth
 from django.urls import reverse
 from auth_app.forms import ProfileForm, UserLoginForm, UserRegForm, PatientForm, DoctorForm
 from auth_app.models import Patient, Doctor
-from cards_app.models import MedCards
 
 
 def login(request):
